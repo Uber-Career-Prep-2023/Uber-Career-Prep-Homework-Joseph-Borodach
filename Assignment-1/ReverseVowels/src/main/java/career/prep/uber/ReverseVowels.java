@@ -1,7 +1,5 @@
 package career.prep.uber;
 
-import java.util.*;
-
 public class ReverseVowels {
     private String s;
 
