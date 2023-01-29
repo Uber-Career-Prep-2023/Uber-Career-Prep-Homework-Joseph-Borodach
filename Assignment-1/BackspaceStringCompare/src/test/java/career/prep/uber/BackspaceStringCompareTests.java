@@ -8,18 +8,91 @@ public class BackspaceStringCompareTests {
 
     @Test
     public void ex1() {
-        final int[] nums = {4, 5, 2, -1, -3, -3, 4, 6, -7};
-        final BackspaceStringCompare ZeroSum = new BackspaceStringCompare(nums);
-        final int actual = ZeroSum.solveIt();
-        final int expected = 2;
+        final String s1 = "abcde";
+        final String s2 = "abcde";
+        final BackspaceStringCompare BSC = new BackspaceStringCompare(s1, s2);
+        final boolean actual = BSC.solveIt();
+        final boolean expected = true;
         assertEquals(expected, actual);
     }
 
     @Test
-    public void nullString() {
-        final int[] nums = null;
+    public void ex2() {
+        final String s1 = "Uber Career Prep";
+        final String s2 = "u#Uber Careee#r Prep";
+        final BackspaceStringCompare BSC = new BackspaceStringCompare(s1, s2);
+        final boolean actual = BSC.solveIt();
+        final boolean expected = true;
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void ex3() {
+        final String s1 = "abcdef###xyz";
+        final String s2 = "abcw#xyz";
+        final BackspaceStringCompare BSC = new BackspaceStringCompare(s1, s2);
+        final boolean actual = BSC.solveIt();
+        final boolean expected = true;
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void ex4() {
+        final String s1 = "abcdef###xyz";
+        final String s2 = "abcdefxyz###";
+        final BackspaceStringCompare BSC = new BackspaceStringCompare(s1, s2);
+        final boolean actual = BSC.solveIt();
+        final boolean expected = false;
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void ex5() {
+        final String s1 = "";
+        final String s2 = "AAAA####";
+        final BackspaceStringCompare BSC = new BackspaceStringCompare(s1, s2);
+        final boolean actual = BSC.solveIt();
+        final boolean expected = true;
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void nullStringA() {
+        final String s1 = null;
+        final String s2 = "u#Uber Careee#r Prep";
         assertThrows(IllegalArgumentException.class,
-                ()-> new BackspaceStringCompare(nums)
+                ()-> new BackspaceStringCompare(s1, s2)
         );
     }
+
+    @Test
+    public void nullStringB() {
+        final String s1 = "u#Uber Careee#r Prep";
+        final String s2 = null;
+        assertThrows(IllegalArgumentException.class,
+                ()-> new BackspaceStringCompare(s1, s2)
+        );
+    }
+
+    /*
+    @Test
+    public void invalidInput1() {
+        final String s1 = "AAA####";
+        final String s2 = "";
+        final BackspaceStringCompare BSC = new BackspaceStringCompare(s1, s2);
+        assertThrows(IllegalArgumentException.class,
+                ()-> BSC.solveIt()
+        );
+    }
+
+    @Test
+    public void invalidInput2() {
+        final String s1 = "#";
+        final String s2 = "";
+        final BackspaceStringCompare BSC = new BackspaceStringCompare(s1, s2);
+        assertThrows(IllegalArgumentException.class,
+                ()-> BSC.solveIt()
+        );
+    }
+     */
 }
