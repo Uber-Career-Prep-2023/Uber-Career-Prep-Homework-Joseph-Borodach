@@ -27,14 +27,14 @@ public class MaxMeanSubArray {
      * @return
      */
     public double solveIt() {
-        double cur = 0;
+        double sum = 0;
         for (int R = 0; R < k; R++) {
-            cur += nums[R];
+            sum += nums[R];
         }
-        double max = cur;
+        double max = sum;
         for (int L = 0, R = (int) k; R < nums.length; L++, R++) {
-            cur += (nums[R] - nums[L]);
-            max = Math.max(cur, max);
+            sum += (nums[R] - nums[L]);
+            max = Math.max(sum, max);
         }
         return max / k;
     }
