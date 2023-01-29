@@ -6,7 +6,7 @@ public class ZeroSumSubArrays {
     private final int[] nums;
 
     /**
-     * Changing size sliding window???
+     * Changing size sliding window
      * Time: O(n)
      * Space: O(n)
      * Is not in place
@@ -36,38 +36,12 @@ public class ZeroSumSubArrays {
      */
     public int solveIt() {
         int count = 0;
-        int sum = 0;
         Map<Integer, Integer> sums = new HashMap<>(Map.of(0, 1));
-        for (int i = 0; i < nums.length; i++) {
+        for (int i = 0, sum = 0; i < nums.length; i++) {
             sum += nums[i];
             count += sums.getOrDefault(sum, 0);
             sums.put(sum, sums.getOrDefault(sum, 0) + 1);
         }
         return count;
     }
-
-    /**
-     * Brute force solution
-     * @return
-     */
-    /*
-    public int solveIt() {
-        int count = 0;
-        for (int R = 0; R < nums.length; R++) {
-            if (nums[R] == 0) {
-                count++;
-            }
-            // System.out.print("{");
-            for (int L = 0; L < R; L++) {
-                nums[L] += nums[R];
-                // System.out.print(nums[L] + ", ");
-                if (nums[L] == 0) {
-                    count++;
-                }
-            }
-            // System.out.println(nums[R] + "}");
-        }
-        return count;
-    }
-    */
 }

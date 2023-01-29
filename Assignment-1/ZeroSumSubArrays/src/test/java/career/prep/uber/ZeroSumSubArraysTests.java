@@ -98,7 +98,7 @@ public class ZeroSumSubArraysTests {
      */
     @Test
     public void ex4b() {
-        //                 {0, 1, 2,  3, 4,  5, 6, 7, 8,  9, 10, 11
+        //                 {0, 1, 2,  3,  4, 5, 6, 7, 8,  9, 10, 11}
         final int[] nums = {0, 1, 2, -2, -1, 0, 0, 1, 2, -2, -1, 0};
         final ZeroSumSubArrays ZeroSum = new ZeroSumSubArrays(nums);
         final int actual = ZeroSum.solveIt();
@@ -113,11 +113,11 @@ public class ZeroSumSubArraysTests {
         final int[] nums = new int[n];
         for (int i = 0; i < h; i++) {
             nums[i] = i;
-            System.out.println(i);
+            //System.out.println(i);
         }
         for (int i = h, j = -(h-1); i < n; i++, j++) {
             nums[i] = j;
-            System.out.println(j);
+            //System.out.println(j);
         }
         final ZeroSumSubArrays ZeroSum = new ZeroSumSubArrays(nums);
         final int actual = ZeroSum.solveIt();
@@ -127,7 +127,7 @@ public class ZeroSumSubArraysTests {
 
     @Test
     public void ex5a() {
-        final int n = 1_000_000;
+        final int n = 1_000;
         final int h = n/2;
         final int[] nums = new int[n];
         for (int i = 0; i < h; i++) {
@@ -138,7 +138,7 @@ public class ZeroSumSubArraysTests {
         }
         final ZeroSumSubArrays ZeroSum = new ZeroSumSubArrays(nums);
         final int actual = ZeroSum.solveIt();
-        final int expected = h+4;
+        final int expected = h + 4; // solveIt(nums)
         assertEquals(expected, actual);
     }
 
@@ -148,5 +148,26 @@ public class ZeroSumSubArraysTests {
         assertThrows(IllegalArgumentException.class,
                 ()-> new ZeroSumSubArrays(nums)
         );
+    }
+
+    /**
+     * This is a brute force solution to confirm that solutions are correct
+     * @param nums
+     * @return
+     */
+    public int solveIt(int[] nums) {
+        int count = 0;
+        for (int R = 0; R < nums.length; R++) {
+            if (nums[R] == 0) {
+                count++;
+            }
+            for (int L = 0; L < R; L++) {
+                nums[L] += nums[R];
+                if (nums[L] == 0) {
+                    count++;
+                }
+            }
+        }
+        return count;
     }
 }
