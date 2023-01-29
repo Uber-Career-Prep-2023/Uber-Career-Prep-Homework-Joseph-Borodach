@@ -2,7 +2,7 @@ package career.prep.uber;
 
 import java.util.*;
 
-public class BackspaceStringCompare {
+public class MergeIntervals {
     private final int[] nums;
 
     /**
@@ -20,7 +20,7 @@ public class BackspaceStringCompare {
      * @throws IllegalArgumentException if input is null
      * @param nums
      */
-    BackspaceStringCompare(int[] nums) {
+    MergeIntervals(int[] nums) {
         if (nums == null) {
             throw new IllegalArgumentException();
         }
