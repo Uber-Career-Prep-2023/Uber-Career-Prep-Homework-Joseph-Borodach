@@ -1,5 +1,24 @@
 package career.prep.uber;
 
+/**
+ * Approach: Fixed-size sliding window.
+ *
+ * Time: O(n), or linear, where n is equal to the size of the input array.
+ * In the worst case, k = 1:
+ * 1) The entire array is iterated over one time == n.
+ * 2) All of the constant opperations are negligent to the overall runtime of the program == c.
+ * Overall runtime == n + c == O(n)
+ *
+ * Space: O(1), or constant.
+ * Because: The only space used in addition to the input array are constant additions.
+ *
+ * Therefore, the algorithm is considered to be in place.
+ *
+ * Unit tests are in separate test file
+ *
+ * To write the solution took ~10
+ * To write test cases probably took another ~20
+ */
 public class MaxMeanSubArray {
     private final int[] nums;
     private final double k;
@@ -17,13 +36,6 @@ public class MaxMeanSubArray {
     }
 
     /**
-     * Fixed-size sliding window
-     * Time: Worst case, O(n), linear, where n is equal to the size of the input array
-     * All of the constant opperations are negligent to the overall runtime of the program
-     * Space: O(1), constant
-     * Unit tests are in test file
-     * To write the solution took ~10
-     * To write test cases probably took another ~20
      * @return
      */
     public double solveIt() {
