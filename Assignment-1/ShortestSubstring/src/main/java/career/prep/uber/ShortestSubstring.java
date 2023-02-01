@@ -1,47 +1,105 @@
 package career.prep.uber;
 
-import java.util.*;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ShortestSubstring {
-    private final int[] nums;
+    private static Logger logger;
+    private final String s1, s2;
 
     /**
-     * Changing size sliding window
-     * Time: O(n)
-     * Space: O(n)
+     * Reset/catch-up two-pointer
+     * Time: O(n) bc in the worst case:
+     * 1) Instantiating the first map is n
+     * 2) And iterating over the second map is 2n, because both pointers need to traverse the entire array
+     * 3) All of the constant operations performed throughout the program, c
+     * So, n + 2n + c == O(n)
+     *
+     * Space: ~2n = O(n)
      * Is not in place
-     * ~10 min to write solution
-     * ~10 min to write tests
+     * ~40 min to write solution
+     * ~2 min to write tests
      *
      * Notes:
-     * a) Originally, I planned a solution which wasn't in place using a queue.
-     * b) But then I realized my solution would be quadratic
-     * c) I really wanted a constant solution
+     * Is it possible to do this close to an in place algo?
+     *
      * @throws IllegalArgumentException if input is null
-     * @param nums
+     * @param strings
      */
-    ShortestSubstring(int[] nums) {
-        if (nums == null) {
+    ShortestSubstring(String[] strings) {
+        if (strings == null || strings.length != 2) {
             throw new IllegalArgumentException();
         }
-        this.nums = nums;
+        logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+        s1 = strings[0];
+        s2 = strings[1];
     }
 
     /**
      * @return
-     * If input is empty, the for loop won't get off the ground.
-     * a) Check if current num equals 0
-     * b) Add any fittings cutoffs to the counter
-     * c) Add new total to the map of cutoffs
+     * What should be returned if there is not min string?
      */
-    public int solveIt() {
-        int count = 0;
-        Map<Integer, Integer> sums = new HashMap<>(Map.of(0, 1));
-        for (int i = 0, sum = 0; i < nums.length; i++) {
-            sum += nums[i];
-            count += sums.getOrDefault(sum, 0);
-            sums.put(sum, sums.getOrDefault(sum, 0) + 1);
+    public String solveIt() {
+        int len1 = s1.length();
+        int len2 = s2.length();
+        if (len2 > len1) {
+            throw new IllegalArgumentException();
         }
-        return count;
+        if (len1 == len2) {
+            return s1.equals(s2) ? s1 : "";
+        }
+        Map<Character, Integer> requiredChars = new HashMap<>();
+        for (char c : s2.toCharArray()) {
+            requiredChars.put(c, requiredChars.getOrDefault(c, 0) + 1);
+        }
+        int L = 0;
+        int R = Integer.MAX_VALUE;
+        Map<Character, Integer> currentChars = new HashMap<>();
+        for (int l = 0, r = 0, REM = len2; r < len1 && R - L > len2; r++) {
+            char cr = s1.charAt(r);
+            if (requiredChars.containsKey(cr)) {
+                int count = currentChars.getOrDefault(cr, 0);
+                if (count < requiredChars.get(cr)) {
+                    REM--;
+                }
+                currentChars.put(cr, count + 1);
+            }
+            while (REM == 0 && l < len1) {
+                if ((r - l) < (R - L)) {
+                    L = l;
+                    R = r;
+                }
+                char cl = s1.charAt(l++);
+                if (requiredChars.containsKey(cl)) {
+                    int count = currentChars.getOrDefault(cl, 0);
+                    if (count > 0 && count <= requiredChars.get(cl)) {
+                        REM++;
+                    }
+                    currentChars.put(cl, count - 1);
+                }
+                logger.log(Level.INFO, s1.substring(L, R));
+            }
+        }
+        if (R == Integer.MAX_VALUE) {
+            return "";
+        }
+        return s1.substring(L, R+1);
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
