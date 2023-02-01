@@ -1,22 +1,33 @@
 package career.prep.uber;
 
-import java.util.*;
+import java.util.Map;
+import java.util.HashMap;
 
+/**
+ * Approach: Changing size sliding window
+ *
+ * Time: O(n), or linear, where n is equal to the size of the input array.
+ * In all cases (Big O, Theta, and Omega) the alogrithm will iterate over the entire array.
+ *
+ * Space: O(n), or linear, where n is equal to the size of the HashMap.
+ * In the worst case, the ongoing sum is always unique and therefore requires a unique key in the HashMap.
+ *
+ * Therefore, the algorithm is considered to be in place.
+ *
+ * Unit tests are in separate test file
+ *
+ * ~10 min to write solution
+ * ~10 min to write tests
+ *
+ * Notes:
+ * a) Originally, I planned a solution which wasn't in place using a queue.
+ * b) But then I realized my solution would be quadratic
+ * c) I really wanted a constant solution
+ */
 public class ZeroSumSubArrays {
     private final int[] nums;
 
     /**
-     * Changing size sliding window
-     * Time: O(n)
-     * Space: O(n)
-     * Is not in place
-     * ~10 min to write solution
-     * ~10 min to write tests
-     *
-     * Notes:
-     * a) Originally, I planned a solution which wasn't in place using a queue.
-     * b) But then I realized my solution would be quadratic
-     * c) I really wanted a constant solution
      * @throws IllegalArgumentException if input is null
      * @param nums
      */
