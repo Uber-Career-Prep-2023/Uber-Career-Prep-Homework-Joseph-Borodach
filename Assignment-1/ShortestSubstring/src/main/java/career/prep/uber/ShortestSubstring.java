@@ -88,18 +88,3 @@ public class ShortestSubstring {
         return s1.substring(L, R+1);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
