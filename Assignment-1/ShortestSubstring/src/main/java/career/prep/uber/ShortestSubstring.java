@@ -11,16 +11,16 @@ public class ShortestSubstring {
 
     /**
      * Reset/catch-up two-pointer
-     * Time: O(n) bc in the worst case:
-     * 1) Instantiating the first map is n
-     * 2) And iterating over the second map is 2n, because both pointers need to traverse the entire array
+     * Time: O(n) bc in the worst case, where the 1st string is much longer than the 2nd string and the sub string is not until the end of the 1st string:
+     * 1) Instantiating the first map is m
+     * 2) Iterating over the second map is 2n, because both pointers need to traverse close to the entire string
      * 3) All of the constant operations performed throughout the program, c
-     * So, n + 2n + c == O(n)
+     * So, m + 2n + c == O(n) bc, at states above, n > m
      *
      * Space: ~2n = O(n)
      * Is not in place
-     * ~40 min to write solution
-     * ~2 min to write tests
+     * ~30 min to write solution
+     * ~10 min to write tests
      *
      * Notes:
      * Is it possible to do this close to an in place algo?
@@ -47,9 +47,6 @@ public class ShortestSubstring {
         if (len2 > len1) {
             throw new IllegalArgumentException();
         }
-        if (len1 == len2) {
-            return s1.equals(s2) ? s1 : "";
-        }
         Map<Character, Integer> requiredChars = new HashMap<>();
         for (char c : s2.toCharArray()) {
             requiredChars.put(c, requiredChars.getOrDefault(c, 0) + 1);
@@ -57,12 +54,12 @@ public class ShortestSubstring {
         int L = 0;
         int R = Integer.MAX_VALUE;
         Map<Character, Integer> currentChars = new HashMap<>();
-        for (int l = 0, r = 0, REM = len2; r < len1 && R - L > len2; r++) {
+        for (int l = 0, r = 0, REM = len2; r < len1 && (L == 0 ? R - L : R - (L-1)) >= len2; r++) {
             char cr = s1.charAt(r);
             if (requiredChars.containsKey(cr)) {
                 int count = currentChars.getOrDefault(cr, 0);
                 if (count < requiredChars.get(cr)) {
-                    REM--;
+                    --REM;
                 }
                 currentChars.put(cr, count + 1);
             }
@@ -75,12 +72,13 @@ public class ShortestSubstring {
                 if (requiredChars.containsKey(cl)) {
                     int count = currentChars.getOrDefault(cl, 0);
                     if (count > 0 && count <= requiredChars.get(cl)) {
-                        REM++;
+                        ++REM;
                     }
                     currentChars.put(cl, count - 1);
                 }
-                logger.log(Level.INFO, s1.substring(L, R));
+                logger.log(Level.INFO, s1.substring(L, R+1));
             }
+            // logger.log(Level.INFO, s1.substring(l, r+1));
         }
         if (R == Integer.MAX_VALUE) {
             return "";

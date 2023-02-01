@@ -35,6 +35,24 @@ public class ShortestSubstringTests {
         assertEquals(expected, actual);
     }
 
+    @Test
+    public void ex4() {
+        final String[] strings = {"abc", "cba"};
+        final ShortestSubstring shortest = new ShortestSubstring(strings);
+        final String actual = shortest.solveIt();
+        final String expected = "abc";
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void ex5() {
+        final String[] strings = {"bdab", "ab"};
+        final ShortestSubstring shortest = new ShortestSubstring(strings);
+        final String actual = shortest.solveIt();
+        final String expected = "ab";
+        assertEquals(expected, actual);
+    }
+
     /**
      * What should be returned?
      */
