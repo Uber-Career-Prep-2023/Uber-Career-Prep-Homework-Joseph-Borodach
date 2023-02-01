@@ -7,7 +7,7 @@ package career.prep.uber;
  * In every case, the entire string will need to be iterated over by the 2 pointers.
  * The numerous constant operations performed throughout the program are negligent to the overall runtime of the program.
  *
- * Space: O(n), where n is equal to the size of the input string.
+ * Space: O(n), or linear, where n is equal to the size of the input string.
  * In every case, a char array is created containing the chars comprising the string.
  *
  * Therefore, is not considered to be in place.
