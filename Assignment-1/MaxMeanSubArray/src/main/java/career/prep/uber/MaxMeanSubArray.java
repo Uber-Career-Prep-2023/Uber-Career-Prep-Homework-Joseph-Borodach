@@ -14,7 +14,7 @@ package career.prep.uber;
  *
  * Therefore, the algorithm is considered to be in place.
  *
- * Unit tests are in separate test file
+ * Unit tests are in separate test file.
  *
  * To write the solution took ~10
  * To write test cases probably took another ~20
