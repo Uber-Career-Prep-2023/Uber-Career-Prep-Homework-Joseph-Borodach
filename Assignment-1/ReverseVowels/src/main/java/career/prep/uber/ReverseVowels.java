@@ -1,24 +1,36 @@
 package career.prep.uber;
 
+/**
+ * Approach: Variable size (shrinking/growing) sliding window.
+ *
+ * Time: O(n), or linear, where n is equal to the size of the input string.
+ * In every case, the entire string will need to be iterated over by the 2 pointers.
+ * The numerous constant operations performed throughout the program are negligent to the overall runtime of the program.
+ *
+ * Space: O(n), where n is equal to the size of the input string.
+ * In every case, a char array is created containing the chars comprising the string.
+ *
+ * Therefore, is not considered to be in place.
+ *
+ * Unit tests are in separate test file
+ *
+ * ~10 min to write solution
+ * ~10 min to write tests
+ *
+ * Notes:
+ * a) If solution was in place, then the runtime would have suffered:
+ * could be quadratic because strings in java are immutable
+ * b) Could have use a char array but was less clean of a solution
+ * c) Could have chosen between upper and lowercase instead of adding both to set,
+ * but that seemed unnecessarily complicated.
+ * d) Originally, I used a set of vowels to check if a given char was a vowel, but then I realized that
+ *      (1) it would be faster to just use an if statement and
+ *      (2) I could add in an addition check to see if the given char was even a letter
+ */
 public class ReverseVowels {
     private String s;
 
     /**
-     * Time: O(n)
-     * Space: O(n)
-     * Is not in place
-     * ~10 min to write solution
-     * ~10 min to write tests
-     *
-     * Notes:
-     * a) If solution was in place, then the runtime would have suffered:
-     * could be quadratic because strings in java are immutable
-     * b) Could have use a char array but was less clean of a solution
-     * c) Could have chosen between upper and lowercase instead of adding both to set,
-     * but that seemed unnecessarily complicated.
-     * d) Originally, I used a set of vowels to check if a given char was a vowel, but then I realized that
-     *      (1) it would be faster to just use an if statement and
-     *      (2) I could add in an addition check to see if the given char was even a letter
      * @throws IllegalArgumentException if input is null
      * @param s
      */
