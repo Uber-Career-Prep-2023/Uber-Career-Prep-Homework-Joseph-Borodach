@@ -5,26 +5,34 @@ import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Approach: Reset/catch-up two-pointer
+ *
+ * Time: O(n), or linear, where n is the length of the 2nd string.
+ * Because in the worst case, the 1st string is much longer than the 2nd string and the sub string is not until the end of the 1st string:
+ * 1) Instantiating the first map is m
+ * 2) Iterating over the second map is 2n, because both pointers need to traverse close to the entire string
+ * 3) All of the constant operations performed throughout the program, c
+ * So, m + 2n + c == O(n) bc, at states above, n > m
+ *
+ * Space: O(n), or linear, where n is the length of each string.
+ * Because in the worst case, both strings are, equally, quite lengthy.
+ *
+ * Therefore, the algorithm is not considered to be in place because of the additional space used.
+ *
+ * Unit tests are in separate test file
+ *
+ * ~30 min to write solution
+ * ~10 min to write tests
+ *
+ * Notes:
+ * Is it possible to do this close to an in place algo?
+ */
 public class ShortestSubstring {
     private static Logger logger;
     private final String s1, s2;
 
     /**
-     * Reset/catch-up two-pointer
-     * Time: O(n) bc in the worst case, where the 1st string is much longer than the 2nd string and the sub string is not until the end of the 1st string:
-     * 1) Instantiating the first map is m
-     * 2) Iterating over the second map is 2n, because both pointers need to traverse close to the entire string
-     * 3) All of the constant operations performed throughout the program, c
-     * So, m + 2n + c == O(n) bc, at states above, n > m
-     *
-     * Space: ~2n = O(n)
-     * Is not in place
-     * ~30 min to write solution
-     * ~10 min to write tests
-     *
-     * Notes:
-     * Is it possible to do this close to an in place algo?
-     *
      * @throws IllegalArgumentException if input is null
      * @param strings
      */
