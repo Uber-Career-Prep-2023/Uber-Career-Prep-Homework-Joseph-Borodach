@@ -31,6 +31,8 @@ import java.util.logging.Logger;
 public class ShortestSubstring {
     private static Logger logger;
     private final String s1, s2;
+    private final int len1, len2;
+    private int L, R, REM;
 
     /**
      * @throws IllegalArgumentException if input is null
@@ -43,6 +45,11 @@ public class ShortestSubstring {
         logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
         s1 = strings[0];
         s2 = strings[1];
+        len1 = s1.length();
+        len2 = s2.length();
+        if (len2 > len1) {
+            throw new IllegalArgumentException();
+        }
     }
 
     /**
@@ -50,47 +57,49 @@ public class ShortestSubstring {
      * What should be returned if there is not min string?
      */
     public String solveIt() {
-        int len1 = s1.length();
-        int len2 = s2.length();
-        if (len2 > len1) {
-            throw new IllegalArgumentException();
-        }
-        Map<Character, Integer> requiredChars = new HashMap<>();
+        Map<Character, Integer> reqChars = new HashMap<>();
         for (char c : s2.toCharArray()) {
-            requiredChars.put(c, requiredChars.getOrDefault(c, 0) + 1);
+            reqChars.put(c, reqChars.getOrDefault(c, 0) + 1);
         }
-        int L = 0;
-        int R = Integer.MAX_VALUE;
-        Map<Character, Integer> currentChars = new HashMap<>();
-        for (int l = 0, r = 0, REM = len2; r < len1 && (L == 0 ? R - L : R - (L-1)) >= len2; r++) {
-            char cr = s1.charAt(r);
-            if (requiredChars.containsKey(cr)) {
-                int count = currentChars.getOrDefault(cr, 0);
-                if (count < requiredChars.get(cr)) {
-                    --REM;
-                }
-                currentChars.put(cr, count + 1);
+        L = 0;
+        R = Integer.MAX_VALUE;
+        REM = len2;
+        Map<Character, Integer> curChars = new HashMap<>();
+        for (int l = 0, r = 0; r < len1 && (L == 0 ? R - L : R - (L-1)) >= len2; r++) {
+            grow(curChars, reqChars, r);
+            l = shrink(curChars, reqChars, l, r);
+        }
+        return R == Integer.MAX_VALUE ? "" : s1.substring(L, R+1);
+    }
+
+    private void grow(Map<Character, Integer> curChars, Map<Character, Integer> reqChars, int r) {
+        char cr = s1.charAt(r);
+        if (reqChars.containsKey(cr)) {
+            int count = curChars.getOrDefault(cr, 0);
+            if (count < reqChars.get(cr)) {
+                --REM;
             }
-            while (REM == 0 && l < len1) {
-                if ((r - l) < (R - L)) {
-                    L = l;
-                    R = r;
-                }
-                char cl = s1.charAt(l++);
-                if (requiredChars.containsKey(cl)) {
-                    int count = currentChars.getOrDefault(cl, 0);
-                    if (count > 0 && count <= requiredChars.get(cl)) {
-                        ++REM;
-                    }
-                    currentChars.put(cl, count - 1);
-                }
-                logger.log(Level.INFO, s1.substring(L, R+1));
+            curChars.put(cr, count + 1);
+        }
+    }
+
+    private int shrink(Map<Character, Integer> curChars, Map<Character, Integer> reqChars, int l, int r) {
+        while (REM == 0 && l < len1) {
+            if ((r - l) < (R - L)) {
+                L = l;
+                R = r;
             }
-            // logger.log(Level.INFO, s1.substring(l, r+1));
+            char cl = s1.charAt(l++);
+            if (reqChars.containsKey(cl)) {
+                int count = curChars.getOrDefault(cl, 0);
+                if (count > 0 && count <= reqChars.get(cl)) {
+                    ++REM;
+                }
+                curChars.put(cl, count - 1);
+            }
+            // logger.log(Level.INFO, s1.substring(L, R+1));
         }
-        if (R == Integer.MAX_VALUE) {
-            return "";
-        }
-        return s1.substring(L, R+1);
+        return l;
+        // logger.log(Level.INFO, s1.substring(l, r+1));
     }
 }
