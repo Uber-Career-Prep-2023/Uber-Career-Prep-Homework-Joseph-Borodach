@@ -57,6 +57,26 @@ public class BackspaceStringCompareTests {
     }
 
     @Test
+    public void ex6() {
+        final String s1 = "bxj##tw";
+        final String s2 = "bxo#j##tw";
+        final BackspaceStringCompare BSC = new BackspaceStringCompare(s1, s2);
+        final boolean actual = BSC.solveIt();
+        final boolean expected = true;
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void ex7() {
+        final String s1 = "isfcow#";
+        final String s2 = "isfcog#w#";
+        final BackspaceStringCompare BSC = new BackspaceStringCompare(s1, s2);
+        final boolean actual = BSC.solveIt();
+        final boolean expected = true;
+        assertEquals(expected, actual);
+    }
+
+    @Test
     public void nullStringA() {
         final String s1 = null;
         final String s2 = "u#Uber Careee#r Prep";

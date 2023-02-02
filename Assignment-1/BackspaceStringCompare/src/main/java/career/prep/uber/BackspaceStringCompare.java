@@ -1,20 +1,32 @@
 package career.prep.uber;
-
+/**
+ * Approach: Reset/catch-up two-pointer
+ *
+ * Time: O(n), or linear, where n is equal to the size of the strings.
+ * In the worst case, both strings are ultimately the same but have numerous backspaces throughout them:
+ * 1) Both strings need to be iterated over, but not simultaneously: Each string demands removing chars at different points.
+ * Therefore, both strings are iterated over, essentially, separately == 2n.
+ * 2) There are numerous other constant operations which are negligent to the overall runtime of the program.
+ * Overall runtime == 2n + c == O(n)
+ *
+ * Space: O(1)
+ *
+ * Therefore, the algorithm is considered to be in place.
+ *
+ * Unit tests are in separate test file.
+ *
+ * ~30 min to write solution
+ * ~10 min to write tests
+ *
+ */
 public class BackspaceStringCompare {
     private final String s1;
     private final String s2;
+    private final int len1;
+    private final int len2;
+
 
     /**
-     * Time: O(n)
-     * Space: O(1)
-     * In place
-     * ~30 min to write solution
-     * ~10 min to write tests
-     *
-     * Approaches:
-     * 1) More brute force oriented: Remove any backspaces
-     * 2) Only pointers
-     *
      * @throws IllegalArgumentException if input is null
      * @param s1
      * @param s2
@@ -25,88 +37,38 @@ public class BackspaceStringCompare {
         }
         this.s1 = s1;
         this.s2 = s2;
+        len1 = s1.length();
+        len2 = s2.length();
     }
 
     /**
-     * Approach #2
-     * Reset/catch-up two-pointer
-     * Time: O(n)
-     * Space: O(1)
-     * In place
-     * Compare as you go
      * @return
      */
     public boolean solveIt() {
-        int R1 = s1.length() - 1;
-        int R2 = s2.length() - 1;
-        while (R1 >= 0 && R2 >= 0) {
-            R1 = getNextChar(s1, R1);
-            R2 = getNextChar(s2, R2);
-            if (R1 < 0 || R2 < 0) {
-                break;
-            }
-            if (s1.charAt(R1) != s2.charAt(R2)) {
+        for (int P1 = len1 - 1, P2 = len2 - 1; P1 >= 0 || P2 >= 0; P1--, P2--) {
+            if (P1 >= 0 && s1.charAt(P1) == '#' || P2 >= 0 && s2.charAt(P2) == '#') {
+                P1 = getNextChar(s1, P1, 0);
+                P2 = getNextChar(s2, P2, 0);
+            } else if (P1 < 0 || P2 < 0 || s1.charAt(P1) != s2.charAt(P2)) {
                 return false;
             }
-            R1--;
-            R2--;
         }
-        if (R1 >= 0) {
-            R1 = getNextChar(s1, R1);
-        } else if (R2 >= 0) {
-            R2 = getNextChar(s2, R2);
-        }
-        return R1 < 0 && R2 < 0;
-    }
-
-    private int getNextChar(String s, int R) {
-        if (s.charAt(R) != '#') {
-            return R;
-        }
-        int S = 0;
-        for (int L = R; L >= 0 && s.charAt(L) == '#'; L--) {
-            S++;
-        }
-        return (R - ((S * 2) - 1)) - 1;
+        return true;
     }
 
     /**
-     * Approach #1: More brute force oriented: Remove any backspaces
+     * @param s
+     * @param P
+     * @param d
      * @return
      */
-    public boolean solveIt1() {
-        StringBuilder sb1 = new StringBuilder(s1);
-        StringBuilder sb2 = new StringBuilder(s2);
-        removeBackSpaces(sb1);
-        removeBackSpaces(sb2);
-        return sb1.compareTo(sb2) == 0;
-    }
-
-    /**
-     * 1) Base Case: There is no sb.charAt(R) != '#', continue moving to the right
-     * 2) Count the number of
-     * {0 1 2 3 4 5  6  7  8  9  10 11 12 13 14 15 16 17 18 19}
-     * {u # U b e r \s  C  a  r  e  e  e  #  r  \s P  r  e  p}
-     * {ab##AB##}
-     * @param sb
-     */
-    private void removeBackSpaces (StringBuilder sb) {
-        int R = sb.length() - 1;
-        while (R >= 0) {
-            if (sb.charAt(R) != '#') {
-                R--;
-                continue;
-            }
-            int S = 0;
-            for (int L = R; L >= 0 && sb.charAt(L) == '#'; L--) {
-                S++;
-            }
-            S = (R - ((S * 2) - 1));
-            if (S < 0) {
-                throw new IllegalArgumentException();
-            }
-            sb.delete(S, R+1);
-            R = S - 1;
+    private int getNextChar(final String s, int P, int d) {
+        if (P < 0 || s.charAt(P) != '#') {
+            return P + 1;
         }
+        for (P -= 1, d = 1; P >= 0 && d > 0; P--) {
+            d = s.charAt(P) == '#' ? d + 1 : d - 1;
+        }
+        return P + 1;
     }
 }
