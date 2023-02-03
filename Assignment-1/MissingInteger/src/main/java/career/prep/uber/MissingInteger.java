@@ -1,7 +1,4 @@
 package career.prep.uber;
-
-import java.util.*;
-
 /**
  * Approach: Binary Search Variation
  *
