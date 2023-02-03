@@ -2,21 +2,34 @@ package career.prep.uber;
 
 import java.util.*;
 
+/**
+ * Approach: Binary Search Variation
+ *
+ * The Idea: Cut down the range in half where we know the that the imbalance is until only 2 indexes remain and we know it's the one on the left.
+ *
+ * Time: O(log n), or linear:
+ * 1) log n because it takes log n iterations of constant work to reach a range of size 2.
+ * 2) The constant operations are negligent to the overall runtime of the program, c.
+ * Therefore, log n + c == O(log n).
+ *
+ * Space: O(1), or constant:
+ * Because there is no additional space taken up in adition to the input integer array.
+ *
+ * Therefore, the algorithm is considered to be in place.
+ *
+ * Unit tests are in separate test file.
+ *
+ * ~20 min to write solution
+ * ~10 min to write tests
+ *
+ * Notes:
+ *
+ */
 public class MissingInteger {
+    private final int len;
     private final int[] nums;
 
     /**
-     * Changing size sliding window
-     * Time: O(n)
-     * Space: O(n)
-     * Is not in place
-     * ~10 min to write solution
-     * ~10 min to write tests
-     *
-     * Notes:
-     * a) Originally, I planned a solution which wasn't in place using a queue.
-     * b) But then I realized my solution would be quadratic
-     * c) I really wanted a constant solution
      * @throws IllegalArgumentException if input is null
      * @param nums
      */
@@ -25,23 +38,28 @@ public class MissingInteger {
             throw new IllegalArgumentException();
         }
         this.nums = nums;
+        len = nums.length;
     }
 
     /**
      * @return
-     * If input is empty, the for loop won't get off the ground.
-     * a) Check if current num equals 0
-     * b) Add any fittings cutoffs to the counter
-     * c) Add new total to the map of cutoffs
      */
     public int solveIt() {
-        int count = 0;
-        Map<Integer, Integer> sums = new HashMap<>(Map.of(0, 1));
-        for (int i = 0, sum = 0; i < nums.length; i++) {
-            sum += nums[i];
-            count += sums.getOrDefault(sum, 0);
-            sums.put(sum, sums.getOrDefault(sum, 0) + 1);
+        if (nums[0] != 1) {
+            return 1;
         }
-        return count;
+        if (nums[len - 1] != len + 1) {
+            return len + 1;
+        }
+        int L = 0, R = len - 1;
+        while ((R - L) > 1) {
+            int mid = (R + L) / 2;
+            if ((nums[L] - L) != (nums[mid] - mid)) {
+                R = mid;
+            } else if ((nums[R] - R) != (nums[mid] - mid)) {
+                L = mid;
+            }
+        }
+        return nums[L] + 1;
     }
 }
