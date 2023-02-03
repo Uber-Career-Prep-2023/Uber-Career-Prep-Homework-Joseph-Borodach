@@ -14,11 +14,7 @@ public class MergeIntervalsTests {
         Arrays.sort(actual, Comparator.comparingDouble(o -> o[0]));
         Arrays.sort(expected, Comparator.comparingDouble(o -> o[0]));
         for (int i = 0; i < actual.length; i++) {
-            //System.out.println("expected[i][0]: " + expected[i][0]);
-            //System.out.println("  actual[i][0]: " + actual[i][0]);
             assertEquals(expected[i][0], actual[i][0]);
-            // System.out.println("expected[i][1]: " + expected[i][1]);
-            //System.out.println("  actual[i][1]: " + actual[i][1]);
             assertEquals(expected[i][1], actual[i][1]);
         }
     }
