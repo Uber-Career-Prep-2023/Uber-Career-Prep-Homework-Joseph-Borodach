@@ -4,7 +4,7 @@ package career.prep.uber;
  *
  * The Idea: Cut down the range in half where we know the that the imbalance is until only 2 indexes remain and we know it's the one on the left.
  *
- * Time: O(log n), or logarithmic:
+ * Time: O(log n), or logarithmic, where n is equal to the size of the input array:
  * 1) log n because it takes log n iterations of constant work to reach a range of size 2.
  * 2) The constant operations are negligent to the overall runtime of the program, c.
  * Therefore, log n + c == O(log n).
