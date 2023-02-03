@@ -9,16 +9,16 @@ import java.util.*;
  *      1) Sort 2-dimensional array
  *      2) Merge in places using 2 pointers.
  * - Time: O(n log n), or linearithmic, where n is equal to the size of the input array.
- *      In the worst case, no intervals can be merged:
+ *      - In the worst case, no intervals can be merged:
  *          1) The array is sorted, n log n.
  *          2) The entire array must be iterated over without merging any intervals, n.
  *          3) All of the constant opperations are negligent to the overall runtime of the program == c.
- * Overall runtime == n log n + n + c == O(n log n)
+ *      - Overall runtime == n log n + n + c == O(n log n)
  *
  * - Space: O(n), or linear.
  *      - In the worst case, is only one merge and we must create a 2nd two dimensional array of size n - 1.
  *
- * Therefore, the algorithm is NOT considered to be in place.
+ * - Therefore, the algorithm is NOT considered to be in place.
  *
  * Unit tests are in separate test file.
  *
