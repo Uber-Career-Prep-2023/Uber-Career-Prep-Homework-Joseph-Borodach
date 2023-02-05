@@ -2,21 +2,27 @@ package career.prep.uber;
 
 import java.util.*;
 
+/**
+ * Changing size sliding window
+ *
+ * Time: O(n), where n is the size of the input array.
+ *      1) In the worst case, every element is a duplicate, but the the array will still be traveresed only 1 time!
+ *      2) There are numerous constant operations which are negligent to the overall runtime of the program, c.
+ *      - Therefore, 2n + c = O(n)
+ *
+ * Space: O(1), this was one of the requirements.
+ *
+ * Therefore, is in place.
+ *
+ * ~10 min to write solution
+ * ~10 min to write tests
+ *
+ * Notes:
+ */
 public class DedupArray {
     private final int[] nums;
 
     /**
-     * Changing size sliding window
-     * Time: O(n)
-     * Space: O(n)
-     * Is not in place
-     * ~10 min to write solution
-     * ~10 min to write tests
-     *
-     * Notes:
-     * a) Originally, I planned a solution which wasn't in place using a queue.
-     * b) But then I realized my solution would be quadratic
-     * c) I really wanted a constant solution
      * @throws IllegalArgumentException if input is null
      * @param nums
      */
@@ -29,19 +35,20 @@ public class DedupArray {
 
     /**
      * @return
-     * If input is empty, the for loop won't get off the ground.
-     * a) Check if current num equals 0
-     * b) Add any fittings cutoffs to the counter
-     * c) Add new total to the map of cutoffs
      */
-    public int solveIt() {
-        int count = 0;
-        Map<Integer, Integer> sums = new HashMap<>(Map.of(0, 1));
-        for (int i = 0, sum = 0; i < nums.length; i++) {
-            sum += nums[i];
-            count += sums.getOrDefault(sum, 0);
-            sums.put(sum, sums.getOrDefault(sum, 0) + 1);
+    public int[] solveIt() {
+        int len = nums.length;
+        for (int L = 0, R = 1; R < len; R++) {
+            if (nums[R] < nums[L]) {
+                throw new IllegalArgumentException();
+            }
+            if (nums[R] != nums[L]) {
+                nums[++L] = nums[R];
+            }
+            if (R != L) {
+                nums[R] = -1;
+            }
         }
-        return count;
+        return nums;
     }
 }
