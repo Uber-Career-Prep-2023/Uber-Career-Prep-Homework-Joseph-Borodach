@@ -1,7 +1,4 @@
 package career.prep.uber;
-
-import java.util.*;
-
 /**
  * Changing size sliding window
  *
@@ -16,8 +13,6 @@ import java.util.*;
  *
  * ~10 min to write solution
  * ~10 min to write tests
- *
- * Notes:
  */
 public class DedupArray {
     private final int[] nums;
