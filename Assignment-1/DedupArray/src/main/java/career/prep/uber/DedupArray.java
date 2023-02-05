@@ -30,6 +30,7 @@ public class DedupArray {
 
     /**
      * @return
+     * @throws IllegalArgumentException if array is not sorted
      */
     public int[] solveIt() {
         int len = nums.length;
