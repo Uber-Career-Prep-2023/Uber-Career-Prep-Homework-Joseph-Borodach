@@ -18,11 +18,9 @@ package career.prep.uber;
  * ~10 min to write tests
  *
  * Notes:
- * a) If solution was in place, then the runtime would have suffered:
- * could be quadratic because strings in java are immutable
+ * a) If solution was in place, then the runtime would have suffered: could be quadratic because strings in java are immutable.
  * b) Could have use a char array but was less clean of a solution
- * c) Could have chosen between upper and lowercase instead of adding both to set,
- * but that seemed unnecessarily complicated.
+ * c) Could have chosen between upper and lowercase instead of adding both to set, but that seemed unnecessarily complicated.
  * d) Originally, I used a set of vowels to check if a given char was a vowel, but then I realized that
  *      (1) it would be faster to just use an if statement and
  *      (2) I could add in an addition check to see if the given char was even a letter
