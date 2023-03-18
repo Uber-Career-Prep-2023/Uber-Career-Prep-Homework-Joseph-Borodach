@@ -15,14 +15,14 @@ public interface SinglyLinkedListI<T> {
      * @return returns new head
      * Since it is assumed that we are only dealing with ints, only ints were error checked for.
      */
-    public Node<T> insertAtFront(Node<T> head, T val);
+    Node<T> insertAtFront(Node<T> head, T val);
 
     /**
      * creates new Node<T> with data val at end
      * @param head
      * @param val
      */
-    public void insertAtBack(Node<T> head, T val);
+    void insertAtBack(Node<T> head, T val);
 
     /**
      * creates new Node<T> with data val after Node<T> loc
@@ -30,20 +30,20 @@ public interface SinglyLinkedListI<T> {
      * @param val
      * @param loc
      */
-    public void insertAfter(Node<T> head, T val, Node<T> loc);
+    void insertAfter(Node<T> head, T val, Node<T> loc);
 
     /**
      * removes first Node<T>
      * @param head
      * @return returns new head
      */
-    public Node<T> deleteFront(Node<T> head);
+    Node<T> deleteFront(Node<T> head);
 
     /**
      * removes last Node<T> Node<T>
      * @param head
      */
-    public void deleteBack(Node<T> head);
+    void deleteBack(Node<T> head);
 
     /**
      * deletes Node<T> loc
@@ -51,26 +51,26 @@ public interface SinglyLinkedListI<T> {
      * @param loc
      * @return returns head
      */
-    public Node<T> deleteNode (Node<T> head, Node<T> loc);
+    Node<T> deleteNode (Node<T> head, Node<T> loc);
 
     /**
      * returns length of the list
      * @param head
      * @return
      */
-    public int length(Node<T> head);
+    int length(Node<T> head);
 
     /**
      * reverses the linked list iteratively
      * @param head
      * @return
      */
-    public Node<T> reverseIterative(Node<T> head);
+    Node<T> reverseIterative(Node<T> head);
 
     /**
      * reverses the linked list recursively (Hint: you will need a helper function)
      * @param head
      * @return
      */
-    public Node<T> reverseRecursive(Node<T> head);
+    Node<T> reverseRecursive(Node<T> head);
 }
