@@ -1,14 +1,9 @@
 package career.prep.uber;
 import java.util.Stack;
 /**
- * Instructions:
- * Implement the following methods.
- * Rather than having a separate linked list class, we will pass a Node<T> struct that represents the head of the list (this is common practice in interview questions).
- * The linked list article includes a Node<T> struct definition in a number of common languages (C++, Python, Java, JavaScript); feel free to use it in your implementation.
- * For simplicity, you can make your nodes store integers rather than generic data types.
- * In each of the methods, you should use pointers in languages that support pointers (e.g., Node<T> * in C++) or a reference in languages that support references (e.g., Python).
- *
- * There are numerous ways performance could be improved if it was fair to assume that the class would be dealign with the same list every time.
+ * There are a few ways performance could be improved using class vars to store data about the list (second to last node, ect.)
+ * if the class would be dealing with the same list every time.
+ * I did not make that assumption
  */
 public class SinglyLinkedList<T> implements SinglyLinkedListI<T> {
     /**

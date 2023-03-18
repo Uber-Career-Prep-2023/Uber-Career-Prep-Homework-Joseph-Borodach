@@ -11,7 +11,7 @@ public class SinglyLinkedListTests {
     @DisplayName("insertAtFront")
     public void t1() {
         final int N = 10;
-        final SinglyLinkedList list = new SinglyLinkedList();
+        final SinglyLinkedListI list = new SinglyLinkedList();
         Node head = null;
         for (int i = N; i >= 1; i--) {
             Node node = list.insertAtFront(head, i);
@@ -26,7 +26,7 @@ public class SinglyLinkedListTests {
     @DisplayName("insertAtBack")
     public void t2() {
         final int N = 10;
-        final  SinglyLinkedList list = new SinglyLinkedList();
+        final SinglyLinkedListI list = new SinglyLinkedList();
 
         Node head = new Node(1);
         assertEquals(1, list.length(head));
@@ -42,7 +42,7 @@ public class SinglyLinkedListTests {
     @DisplayName("insertAfter")
     public void t3() {
         final int N = 15;
-        final  SinglyLinkedList list = new SinglyLinkedList();
+        final SinglyLinkedListI list = new SinglyLinkedList();
 
         Node head = new Node(1);
         assertEquals(1, list.length(head));
@@ -72,7 +72,7 @@ public class SinglyLinkedListTests {
     @DisplayName("deleteFront")
     public void t4() {
         final int N = 10;
-        final  SinglyLinkedList list = new SinglyLinkedList();
+        final SinglyLinkedListI list = new SinglyLinkedList();
 
         Node head = new Node(1);
 
@@ -93,7 +93,7 @@ public class SinglyLinkedListTests {
     public void t5() {
         final int S = 1;
         final int N = 15;
-        final  SinglyLinkedList list = new SinglyLinkedList();
+        final SinglyLinkedListI list = new SinglyLinkedList();
 
         Node head = new Node(S);
 
@@ -116,7 +116,7 @@ public class SinglyLinkedListTests {
     public void t6() {
         final int S = 1;
         final int N = 15;
-        final  SinglyLinkedList list = new SinglyLinkedList();
+        final SinglyLinkedListI list = new SinglyLinkedList();
 
         Node head = new Node(S);
 
@@ -141,7 +141,7 @@ public class SinglyLinkedListTests {
     public void t7() {
         final int S = 1;
         final int N = 15;
-        final  SinglyLinkedList list = new SinglyLinkedList();
+        final SinglyLinkedListI list = new SinglyLinkedList();
 
         Node head = new Node(S);
 
@@ -161,7 +161,7 @@ public class SinglyLinkedListTests {
     public void t8() {
         final int S = 1;
         final int N = 15;
-        final  SinglyLinkedList list = new SinglyLinkedList();
+        final SinglyLinkedListI list = new SinglyLinkedList();
 
         Node head = new Node(S);
 

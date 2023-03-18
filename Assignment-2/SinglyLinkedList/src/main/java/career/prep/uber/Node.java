@@ -49,10 +49,5 @@ public class Node<T> {
     @Override
     public int hashCode() {
         return (int) this.val;
-        /*
-        int hash = 3;
-        hash = 53 * hash + (this.val != null ? this.val.hashCode() : 0);
-        return hash;
-        */
     }
 }
