@@ -3,14 +3,16 @@ import java.util.Stack;
 /**
  * Instructions:
  * Implement the following methods.
- * Rather than having a separate linked list class, we will pass a Node struct that represents the head of the list (this is common practice in interview questions).
- * The linked list article includes a Node struct definition in a number of common languages (C++, Python, Java, JavaScript); feel free to use it in your implementation.
+ * Rather than having a separate linked list class, we will pass a Node<T> struct that represents the head of the list (this is common practice in interview questions).
+ * The linked list article includes a Node<T> struct definition in a number of common languages (C++, Python, Java, JavaScript); feel free to use it in your implementation.
  * For simplicity, you can make your nodes store integers rather than generic data types.
- * In each of the methods, you should use pointers in languages that support pointers (e.g., Node * in C++) or a reference in languages that support references (e.g., Python).
+ * In each of the methods, you should use pointers in languages that support pointers (e.g., Node<T> * in C++) or a reference in languages that support references (e.g., Python).
+ *
+ * There are numerous ways performance could be improved if it was fair to assume that the class would be dealign with the same list every time.
  */
 public class SinglyLinkedList<T> implements SinglyLinkedListI<T> {
     /**
-     * creates new Node with data val at front
+     * creates new Node<T> with data val at front
      * @param head
      * @param val
      * @return returns new head
@@ -18,9 +20,10 @@ public class SinglyLinkedList<T> implements SinglyLinkedListI<T> {
      * It might not make sense to throw an IAE if the head is null, because then there can never be a list of size 1.
      */
     @Override
-    public Node insertAtFront(Node head, T val) {
+    public Node<T> insertAtFront(Node<T> head, T val) {
+        // verify(head);
         verify(val);
-        Node node = new Node(val);
+        Node<T> node = new Node<>(val);
         if (head != null) {
             node.setNext(head);
         }
@@ -28,62 +31,64 @@ public class SinglyLinkedList<T> implements SinglyLinkedListI<T> {
     }
 
     /**
-     * creates new Node with data val at end
+     * creates new Node<T> with data val at end
      * @param head
      * @param val
      * Time: In every case n, where n is the number of nodes in the list.
      */
     @Override
-    public void insertAtBack(Node head, T val) {
+    public void insertAtBack(Node<T> head, T val) {
         verify(head);
         verify(val);
-        Node curr = head;
+        Node<T> curr = head;
         while(curr.getNext() != null) {
             curr = curr.getNext();
         }
-        curr.setNext(new Node(val));
+        curr.setNext(new Node<T>(val));
     }
 
     /**
-     * creates new Node with data val after Node loc
+     * creates new Node<T> with data val after Node<T> loc
      * @param head
      * @param val
      * @param loc
      * Time: In every case d, where d is the number of nodes between head and loc.
      */
     @Override
-    public void insertAfter(Node head, T val, Node loc) {
+    public void insertAfter(Node<T> head, T val, Node<T> loc) {
         verify(head);
         verify(loc);
         verify(val);
-        Node curr = head;
+        Node<T> curr = head;
         while(!curr.equals(loc)) {
             verify((curr = curr.getNext()));
         }
-        curr.setNext(new Node(val, curr.getNext()));
+        curr.setNext(new Node<T>(val, curr.getNext()));
     }
 
     /**
-     * removes first Node
+     * removes first Node<T>
      * @param head
      * @return returns new head
+     * Time: In every case O(1), constant.
      */
     @Override
-    public Node deleteFront(Node head) {
+    public Node<T> deleteFront(Node<T> head) {
         verify(head);
-        Node node = head.getNext();
+        Node<T> node = head.getNext();
         return node;
     }
 
     /**
-     * removes last Node Node
+     * removes last Node<T> Node<T>
      * @param head
+     * Time: In every case n, where n is the number of nodes in the list.
      */
     @Override
-    public void deleteBack(Node head) {
+    public void deleteBack(Node<T> head) {
         verify(head);
         verify(head.getNext());
-        Node curr = head;
+        Node<T> curr = head;
         while(curr.getNext().getNext() != null) {
             curr = curr.getNext();
         }
@@ -92,17 +97,18 @@ public class SinglyLinkedList<T> implements SinglyLinkedListI<T> {
     }
 
     /**
-     * deletes Node loc
+     * deletes Node<T> loc
      * @param head
      * @param loc
      * @return returns head
      * What if the are multiple nodes like this?
+     * Time: In every case d, where d is the number of nodes between head and loc.
      */
     @Override
-    public Node deleteNode(Node head, Node loc) {
+    public Node<T> deleteNode(Node<T> head, Node<T> loc) {
         verify(head);
         verify(loc);
-        Node curr = head;
+        Node<T> curr = head;
         verify(curr.getNext());
         while(!curr.getNext().equals(loc)) {
             verify((curr = curr.getNext()));
@@ -117,11 +123,13 @@ public class SinglyLinkedList<T> implements SinglyLinkedListI<T> {
      * @return
      * If the head is null, return 0.
      * It would also make sense to throw an IAE.
+     * Time: In every case n, where n is the number of nodes in the list.
      */
     @Override
-    public int length(Node head) {
+    public int length(Node<T> head) {
+        // verify(head);
         int count = 0;
-        Node curr = head;
+        Node<T> curr = head;
         while (curr != null) {
             count++;
             curr = curr.getNext();
@@ -133,18 +141,40 @@ public class SinglyLinkedList<T> implements SinglyLinkedListI<T> {
      * reverses the linked list iteratively
      * @param head
      * @return
+     * Time: In every case n, where n is the number of nodes in the list.
+     * Space: Constant.
      */
     @Override
-    public Node reverseIterative(Node head) {
-        Stack<Node> stack = new Stack<>();
+    public Node<T> reverseIterative(Node<T> head) {
+        verify(head);
+        Node<T> prev = null;
+        while (head.getNext() != null) {
+            Node<T> next = head.getNext();
+            head.setNext(prev);
+            prev = head;
+            head = next;
+        }
+        head.setNext(prev);
+        return head;
+    }
+
+    /**
+     * reverses the linked list iteratively
+     * @param head
+     * @return
+     * Time: In every case n, where n is the number of nodes in the list.
+     * Space: In every case n, where n is the number of nodes in the list.
+     */
+    private Node<T> reverseUsingStack(Node<T> head) {
+        Stack<Node<T>> stack = new Stack<>();
         while (head != null) {
             stack.push(head);
             head = head.getNext();
         }
         head = stack.pop();
-        Node curr = head;
+        Node<T> curr = head;
         while (!stack.isEmpty()) {
-            Node next = stack.pop();
+            Node<T> next = stack.pop();
             curr.setNext(next);
             curr = next;
         }
@@ -156,20 +186,24 @@ public class SinglyLinkedList<T> implements SinglyLinkedListI<T> {
      * reverses the linked list recursively
      * @param head
      * @return
+     * Time: In every case n, where n is the number of nodes in the list.
      */
     @Override
-    public Node reverseRecursive(Node head) {
+    public Node<T> reverseRecursive(Node<T> head) {
         verify(head);
         return reverse(null, head);
     }
 
-    private Node reverse(Node prev, Node node) {
-        Node next = node.getNext();
+    private Node<T> reverse(Node<T> prev, Node<T> node) {
+        if (node == null) {
+            return prev;
+        }
+        Node<T> next = node.getNext();
         node.setNext(prev);
-        return next != null ? reverse(node, next) : node;
+        return reverse(node, next);
     }
 
-    private void verify(Node node) {
+    private void verify(Node<T> node) {
         if (node == null) {
             throw new IllegalStateException();
         }
