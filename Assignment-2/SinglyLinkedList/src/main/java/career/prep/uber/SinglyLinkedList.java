@@ -1,5 +1,4 @@
 package career.prep.uber;
-import java.util.Stack;
 /**
  * There are a few ways performance could be improved using class vars to store data about the list (second to last node, ect.)
  * if the class would be dealing with the same list every time.
@@ -16,7 +15,6 @@ public class SinglyLinkedList<T> implements SinglyLinkedListI<T> {
      */
     @Override
     public Node<T> insertAtFront(Node<T> head, T val) {
-        // verify(head);
         verify(val);
         Node<T> node = new Node<>(val);
         if (head != null) {
@@ -122,7 +120,6 @@ public class SinglyLinkedList<T> implements SinglyLinkedListI<T> {
      */
     @Override
     public int length(Node<T> head) {
-        // verify(head);
         int count = 0;
         Node<T> curr = head;
         while (curr != null) {
@@ -137,7 +134,7 @@ public class SinglyLinkedList<T> implements SinglyLinkedListI<T> {
      * @param head
      * @return
      * Time: In every case n, where n is the number of nodes in the list.
-     * Space: Constant.
+     * Space: Constant. Originally, I wrote an implementation using a stack, which was O(n).
      */
     @Override
     public Node<T> reverseIterative(Node<T> head) {
@@ -150,30 +147,6 @@ public class SinglyLinkedList<T> implements SinglyLinkedListI<T> {
             head = next;
         }
         head.setNext(prev);
-        return head;
-    }
-
-    /**
-     * reverses the linked list iteratively
-     * @param head
-     * @return
-     * Time: In every case n, where n is the number of nodes in the list.
-     * Space: In every case n, where n is the number of nodes in the list.
-     */
-    private Node<T> reverseUsingStack(Node<T> head) {
-        Stack<Node<T>> stack = new Stack<>();
-        while (head != null) {
-            stack.push(head);
-            head = head.getNext();
-        }
-        head = stack.pop();
-        Node<T> curr = head;
-        while (!stack.isEmpty()) {
-            Node<T> next = stack.pop();
-            curr.setNext(next);
-            curr = next;
-        }
-        curr.setNext(null);
         return head;
     }
 
