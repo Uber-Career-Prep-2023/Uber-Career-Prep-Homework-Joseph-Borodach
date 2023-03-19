@@ -2,18 +2,19 @@ package career.prep.uber;
 
 public class Node<T> {
     public T val;
-    private Node<T> next;
+    private Node next;
     public Node(T val) {
         verify(val);
         this.val = val;
     }
 
-    public Node(T val, Node<T> next) {
+    public Node(T val, Node next) {
         this(val);
         this.next = next;
     }
 
-    public void setNext(Node<T> next) {
+    public void setNext(Node next) {
+        // verify(next);
         this.next = next;
     }
 
@@ -21,7 +22,7 @@ public class Node<T> {
         return this.next;
     }
 
-    private void verify(Node<T> node) {
+    private void verify(Node node) {
         if (node == null) {
             throw new IllegalStateException();
         }
@@ -38,7 +39,7 @@ public class Node<T> {
         if (obj == null) {
             return false;
         }
-        final Node<T> other = (Node) obj;
+        final Node other = (Node) obj;
         if (other.val == null) {
             return false;
         }
