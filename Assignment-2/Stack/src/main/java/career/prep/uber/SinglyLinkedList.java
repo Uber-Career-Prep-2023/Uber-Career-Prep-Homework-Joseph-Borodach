@@ -86,7 +86,6 @@ public class SinglyLinkedList<T> implements SinglyLinkedListI<T> {
             curr = curr.getNext();
         }
         curr.setNext(null);
-
     }
 
     /**
