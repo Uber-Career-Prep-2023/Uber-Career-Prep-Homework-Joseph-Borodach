@@ -1,6 +1,6 @@
 package career.prep.uber;
 
-public class Node<T> {
+public class Node<T> extends Util {
     public T val;
     private Node<T> next;
     public Node(T val) {
@@ -19,18 +19,6 @@ public class Node<T> {
 
     public Node getNext() {
         return this.next;
-    }
-
-    private void verify(Node<T> node) {
-        if (node == null) {
-            throw new IllegalStateException();
-        }
-    }
-
-    private void verify(T val) {
-        if (val == null) {
-            throw new IllegalStateException();
-        }
     }
 
     @Override
