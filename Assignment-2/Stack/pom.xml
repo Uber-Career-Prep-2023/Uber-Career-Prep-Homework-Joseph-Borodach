@@ -8,13 +8,6 @@
     <artifactId>Stack</artifactId>
     <version>1.0-SNAPSHOT</version>
     <dependencies>
-        <!--
-        <dependency>
-            <groupId>Uber-Career-Prep-Homework-Joseph-Borodach.Assignment-2.SinglyLinkedList</groupId>
-            <artifactId>SinglyLinkedList</artifactId>
-            <version>1.0</version>
-        </dependency>
-        -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -30,8 +23,32 @@
     </dependencies>
 
     <properties>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+        <java.version>11</java.version>
+        <junit.version>4.13.1</junit.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <mavencompiler.target>1.8</mavencompiler.target>
     </properties>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <includes>
+                        <include>**/*.java</include>
+                    </includes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>11</source>
+                    <target>11</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
