@@ -31,7 +31,8 @@ public class SinglyLinkedList<T> extends Util<T> implements SinglyLinkedListI<T>
      */
     @Override
     public void insertAtBack(Node<T> head, T val) {
-        verify(head, val);
+        verify(head);
+        verify(val);
         Node<T> curr = head;
         while(curr.getNext() != null) {
             curr = curr.getNext();
@@ -48,7 +49,9 @@ public class SinglyLinkedList<T> extends Util<T> implements SinglyLinkedListI<T>
      */
     @Override
     public void insertAfter(Node<T> head, T val, Node<T> loc) {
-        verify(head, val, loc);
+        verify(head);
+        verify(loc);
+        verify(val);
         Node<T> curr = head;
         while(!curr.equals(loc)) {
             verify((curr = curr.getNext()));
@@ -96,7 +99,8 @@ public class SinglyLinkedList<T> extends Util<T> implements SinglyLinkedListI<T>
      */
     @Override
     public Node<T> deleteNode(Node<T> head, Node<T> loc) {
-        verify(head, loc);
+        verify(head);
+        verify(loc);
         Node<T> curr = head;
         verify(curr.getNext());
         while(!curr.getNext().equals(loc)) {
