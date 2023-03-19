@@ -11,11 +11,12 @@ public class SinglyLinkedListTests {
     @DisplayName("insertAtFront")
     public void t1() {
         final int N = 10;
-        final SinglyLinkedListI list = new SinglyLinkedList();
-        Node head = null;
+        final SinglyLinkedListI<Integer> list = new SinglyLinkedList<>();
+        Node<Integer> head = null;
         for (int i = N; i >= 1; i--) {
-            Node node = list.insertAtFront(head, i);
-            assertEquals(i, node.val);
+            Node<Integer> node = list.insertAtFront(head, i);
+            int actual = node.val;
+            assertEquals(i, actual);
             assertEquals((N - i) + 1, list.length(node));
             head = node;
         }
@@ -26,9 +27,9 @@ public class SinglyLinkedListTests {
     @DisplayName("insertAtBack")
     public void t2() {
         final int N = 10;
-        final SinglyLinkedListI list = new SinglyLinkedList();
+        final SinglyLinkedListI<Integer> list = new SinglyLinkedList<>();
 
-        Node head = new Node(1);
+        Node<Integer> head = new Node<>(1);
         assertEquals(1, list.length(head));
 
         for (int i = 2; i <= N; i++) {
@@ -42,9 +43,9 @@ public class SinglyLinkedListTests {
     @DisplayName("insertAfter")
     public void t3() {
         final int N = 15;
-        final SinglyLinkedListI list = new SinglyLinkedList();
+        final SinglyLinkedListI<Integer> list = new SinglyLinkedList<>();
 
-        Node head = new Node(1);
+        Node<Integer> head = new Node<>(1);
         assertEquals(1, list.length(head));
 
         int third = N/3;
@@ -62,7 +63,7 @@ public class SinglyLinkedListTests {
         int count = twoThirds;
 
         for (int i = third + 1; i <= twoThirds; i++) {
-            list.insertAfter(head, i, new Node(i-1));
+            list.insertAfter(head, i, new Node<>(i-1));
             assertEquals(++count, list.length(head));
         }
         assertOrder(1, N, head);
@@ -72,9 +73,9 @@ public class SinglyLinkedListTests {
     @DisplayName("deleteFront")
     public void t4() {
         final int N = 10;
-        final SinglyLinkedListI list = new SinglyLinkedList();
+        final SinglyLinkedListI<Integer> list = new SinglyLinkedList<>();
 
-        Node head = new Node(1);
+        Node<Integer> head = new Node<>(1);
 
         for (int i = 2; i <= N; i++) {
             list.insertAtBack(head, i);
@@ -93,9 +94,9 @@ public class SinglyLinkedListTests {
     public void t5() {
         final int S = 1;
         final int N = 15;
-        final SinglyLinkedListI list = new SinglyLinkedList();
+        final SinglyLinkedListI<Integer> list = new SinglyLinkedList<>();
 
-        Node head = new Node(S);
+        Node<Integer> head = new Node<>(S);
 
         for (int i = S + 1; i <= N; i++) {
             list.insertAtBack(head, i);
@@ -116,9 +117,9 @@ public class SinglyLinkedListTests {
     public void t6() {
         final int S = 1;
         final int N = 15;
-        final SinglyLinkedListI list = new SinglyLinkedList();
+        final SinglyLinkedListI<Integer> list = new SinglyLinkedList<>();
 
-        Node head = new Node(S);
+        Node<Integer> head = new Node<>(S);
 
         for (int i = S + 1; i <= N; i++) {
             list.insertAtBack(head, i);
@@ -130,7 +131,7 @@ public class SinglyLinkedListTests {
         int count = N;
         int startAt = S + 3;
         for (int i = startAt; i < N; i++) {
-            list.deleteNode(head, new Node(i));
+            list.deleteNode(head, new Node<>(i));
             assertEquals(--count, list.length(head));
             assertOrder(S, startAt - 1, i + 1, N, head);
         }
@@ -141,9 +142,9 @@ public class SinglyLinkedListTests {
     public void t7() {
         final int S = 1;
         final int N = 15;
-        final SinglyLinkedListI list = new SinglyLinkedList();
+        final SinglyLinkedListI<Integer> list = new SinglyLinkedList<>();
 
-        Node head = new Node(S);
+        Node<Integer> head = new Node<>(S);
 
         for (int i = S + 1; i <= N; i++) {
             list.insertAtBack(head, i);
@@ -161,9 +162,9 @@ public class SinglyLinkedListTests {
     public void t8() {
         final int S = 1;
         final int N = 15;
-        final SinglyLinkedListI list = new SinglyLinkedList();
+        final SinglyLinkedListI<Integer> list = new SinglyLinkedList<>();
 
-        Node head = new Node(S);
+        Node<Integer> head = new Node<>(S);
 
         for (int i = S + 1; i <= N; i++) {
             list.insertAtBack(head, i);
