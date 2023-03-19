@@ -5,6 +5,7 @@ public interface StackI<T> {
      * @return returns the top item in the stack
      */
     T peek();
+
     T top();
 
     /**
@@ -22,5 +23,6 @@ public interface StackI<T> {
      * @return returns a boolean indicating whether the stack is empty
      */
     boolean isEmpty();
+
     int size();
 }

@@ -1,7 +1,5 @@
 package career.prep.uber;
-
 import java.util.EmptyStackException;
-
 public class Stack<T> implements StackI<T> {
     private int N;
     private Node<T> head;
@@ -12,6 +10,7 @@ public class Stack<T> implements StackI<T> {
     }
 
     /**
+     * Time: O(1), constant.
      * @return returns the top item in the stack
      */
     @Override
@@ -22,14 +21,19 @@ public class Stack<T> implements StackI<T> {
         return head.val;
     }
 
+    /**
+     * Time: O(1), constant.
+     * @return returns the top item in the stack
+     */
     @Override
     public T peek() {
         return top();
     }
 
     /**
-     * @param x
+     * Time: O(1), constant.
      * adds x to the top of the stack
+     * @param x
      */
     @Override
     public void push(T x) {
@@ -38,6 +42,7 @@ public class Stack<T> implements StackI<T> {
     }
 
     /**
+     * Time: O(1), constant.
      * @return removes and returns the top item in the stack
      */
     @Override
@@ -51,6 +56,10 @@ public class Stack<T> implements StackI<T> {
         return val;
     }
 
+    /**
+     * Time: O(1), constant.
+     * @return returns a boolean indicating whether the stack is empty
+     */
     @Override
     public boolean isEmpty() {
         if (head == null) {
@@ -59,6 +68,10 @@ public class Stack<T> implements StackI<T> {
         return false;
     }
 
+    /**
+     * Time: O(1), constant.
+     * @return size of the stack
+     */
     @Override
     public int size() {
         return N;
