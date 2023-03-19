@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class BinarySearchTree implements BinarySearchTreeI {
-    public Node root;             // root of BST
+    public Node root;
     public BinarySearchTree() {
         root = null;
     }
@@ -84,13 +84,14 @@ public class BinarySearchTree implements BinarySearchTreeI {
     }
 
     /**
+     * Space: O(n), could be improved to constant.
      * deletes the Node with data val, if it exists
      * @param val
      * @return
      */
     public int delete(int val) {
         if (root == null) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("[delete 2]: Value does not exist in tree.");
         }
         if (root.val == val) {
             Node right = root.right;
@@ -102,7 +103,7 @@ public class BinarySearchTree implements BinarySearchTreeI {
         while (node != null) {
             if (node.val > val) {
                 if (node.left == null) {
-                    throw new IllegalArgumentException();
+                    throw new IllegalArgumentException("[delete 12]: Value does not exist in tree.");
                 }
                 if (node.left.val == val) {
                     Node right = node.left.right;
@@ -113,7 +114,7 @@ public class BinarySearchTree implements BinarySearchTreeI {
                 node = node.left;
             } else {
                 if (node.right == null) {
-                    throw new IllegalArgumentException();
+                    throw new IllegalArgumentException("[delete 23]: Value does not exist in tree.");
                 }
                 if (node.right.val == val) {
                     Node right = node.right.right;
@@ -124,7 +125,7 @@ public class BinarySearchTree implements BinarySearchTreeI {
                 node = node.right;
             }
         }
-        throw new IllegalArgumentException();
+        throw new IllegalArgumentException("[delete 36]: Value does not exist in tree.");
     }
 
     private void addNodes(Node node) {
