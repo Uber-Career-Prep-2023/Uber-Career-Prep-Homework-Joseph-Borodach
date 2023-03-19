@@ -20,6 +20,7 @@ public class DoublyLinkedList<T> extends Util implements DoublyLinkedListI<T> {
 
     /**
      * creates new Node with data val at end
+     *
      * @param head
      * @param val
      */
@@ -27,7 +28,7 @@ public class DoublyLinkedList<T> extends Util implements DoublyLinkedListI<T> {
     public void insertAtBack(Node<T> head, T val) {
         verify(head, val);
         Node<T> curr = head;
-        while(curr.next != null) {
+        while (curr.next != null) {
             curr = curr.next;
         }
         curr.next = new Node<>(val, curr, null);
@@ -35,6 +36,7 @@ public class DoublyLinkedList<T> extends Util implements DoublyLinkedListI<T> {
 
     /**
      * creates new Node with data val after Node loc
+     *
      * @param head
      * @param val
      * @param loc
@@ -43,7 +45,7 @@ public class DoublyLinkedList<T> extends Util implements DoublyLinkedListI<T> {
     public void insertAfter(Node<T> head, T val, Node<T> loc) {
         verify(head, val, loc);
         Node<T> curr = head;
-        while(!curr.equals(loc)) {
+        while (!curr.equals(loc)) {
             verify((curr = curr.next));
         }
         Node<T> next = curr.next;
@@ -55,6 +57,7 @@ public class DoublyLinkedList<T> extends Util implements DoublyLinkedListI<T> {
 
     /**
      * removes first Node
+     *
      * @param head
      * @return returns new head
      */
@@ -75,9 +78,11 @@ public class DoublyLinkedList<T> extends Util implements DoublyLinkedListI<T> {
     @Override
     public void deleteBack(Node<T> head) {
         verify(head);
-        verify(head.next);
+        if (length(head) == 1) {
+            return;
+        }
         Node<T> curr = head;
-        while(curr.next.next != null) {
+        while (curr.next.next != null) {
             curr = curr.next;
         }
         curr.next.prev = null;
@@ -93,9 +98,14 @@ public class DoublyLinkedList<T> extends Util implements DoublyLinkedListI<T> {
     @Override
     public Node<T> deleteNode(Node<T> head, Node<T> loc) {
         verify(head, loc);
+        if (length(head) == 1) {
+            if (!head.equals(loc)) {
+                throw new IllegalArgumentException();
+            }
+            return null;
+        }
         Node<T> curr = head;
-        verify(curr.next);
-        while(!curr.next.equals(loc)) {
+        while (!curr.next.equals(loc)) {
             verify((curr = curr.next));
         }
         Node<T> next = curr.next.next;
@@ -107,6 +117,7 @@ public class DoublyLinkedList<T> extends Util implements DoublyLinkedListI<T> {
     }
 
     /**
+     * Both directions?
      * @param head
      * @return returns length of the list
      */
@@ -130,6 +141,7 @@ public class DoublyLinkedList<T> extends Util implements DoublyLinkedListI<T> {
 
     /**
      * reverses the linked list iteratively
+     *
      * @param head
      * @return
      */
@@ -145,6 +157,7 @@ public class DoublyLinkedList<T> extends Util implements DoublyLinkedListI<T> {
             head = next;
         }
         head.next = prev;
+        head.prev = null;
         return head;
     }
 
@@ -169,14 +182,3 @@ public class DoublyLinkedList<T> extends Util implements DoublyLinkedListI<T> {
         return reverse(node, next);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
