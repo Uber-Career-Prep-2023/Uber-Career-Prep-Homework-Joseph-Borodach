@@ -1,6 +1,6 @@
 package career.prep.uber;
 
-public interface BinarySearchTreeI<T> {
+public interface BinarySearchTreeI {
     /**
      * @return returns the minimum value in the BST
      */
@@ -30,4 +30,8 @@ public interface BinarySearchTreeI<T> {
      * @return
      */
     int delete(int val);
+
+    Node getRoot();
+
+    boolean isEmpty();
 }
