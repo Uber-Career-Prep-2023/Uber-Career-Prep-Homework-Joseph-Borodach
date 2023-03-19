@@ -4,7 +4,7 @@ package career.prep.uber;
  * if the class would be dealing with the same list every time.
  * I did not make that assumption
  */
-public class SinglyLinkedList<T> implements SinglyLinkedListI<T> {
+public class SinglyLinkedList<T> extends Util<T> implements SinglyLinkedListI<T> {
     /**
      * creates new Node<T> with data val at front
      * @param head
@@ -86,6 +86,7 @@ public class SinglyLinkedList<T> implements SinglyLinkedListI<T> {
             curr = curr.getNext();
         }
         curr.setNext(null);
+
     }
 
     /**
@@ -168,17 +169,5 @@ public class SinglyLinkedList<T> implements SinglyLinkedListI<T> {
         Node<T> next = node.getNext();
         node.setNext(prev);
         return reverse(node, next);
-    }
-
-    private void verify(Node<T> node) {
-        if (node == null) {
-            throw new IllegalStateException();
-        }
-    }
-
-    private void verify(T val) {
-        if (val == null) {
-            throw new IllegalStateException();
-        }
     }
 }

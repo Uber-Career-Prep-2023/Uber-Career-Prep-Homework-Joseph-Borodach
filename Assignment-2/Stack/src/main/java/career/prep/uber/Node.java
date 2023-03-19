@@ -1,20 +1,19 @@
 package career.prep.uber;
 
-public class Node<T> {
+public class Node<T> extends Util {
     public T val;
-    private Node next;
+    private Node<T> next;
     public Node(T val) {
         verify(val);
         this.val = val;
     }
 
-    public Node(T val, Node next) {
+    public Node(T val, Node<T> next) {
         this(val);
         this.next = next;
     }
 
-    public void setNext(Node next) {
-        // verify(next);
+    public void setNext(Node<T> next) {
         this.next = next;
     }
 
@@ -22,24 +21,12 @@ public class Node<T> {
         return this.next;
     }
 
-    private void verify(Node node) {
-        if (node == null) {
-            throw new IllegalStateException();
-        }
-    }
-
-    private void verify(T val) {
-        if (val == null) {
-            throw new IllegalStateException();
-        }
-    }
-
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
             return false;
         }
-        final Node other = (Node) obj;
+        final Node<T> other = (Node) obj;
         if (other.val == null) {
             return false;
         }
