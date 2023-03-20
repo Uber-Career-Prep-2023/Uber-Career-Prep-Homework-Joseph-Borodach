@@ -66,47 +66,50 @@ public class BinarySearchTree implements BinarySearchTreeI {
      * deletes the Node with data val, if it exists
      * @param val
      * @return
+     * If tree is empty, either throw an exception or return value.
      */
     public int delete(int val) {
-        if (root == null) {
-            throw new IllegalArgumentException("[delete 2]: Value does not exist in tree.");
+        Node pre = null;
+        Node cur = root;
+        while(cur != null && cur.val != val) {
+            pre = cur;
+            cur = val < cur.val ? cur.left : cur.right;
         }
-        if (root.val == val) {
-            Node right = root.right;
-            root = root.left;
-            insert(right);
-            return val;
+        if (pre == null) {
+            root = delete(cur);
+        } else if (pre.left == cur) {
+            pre.left = delete(cur);
+        } else {
+            pre.right = delete(cur);
         }
-        Node node = root;
-        while (node != null) {
-            if (node.val > val) {
-                if (node.left == null) {
-                    throw new IllegalArgumentException("[delete 12]: Value does not exist in tree.");
-                }
-                if (node.left.val == val) {
-                    Node right = node.left.right;
-                    node.left = node.left.left;
-                    insert(right);
-                    return val;
-                }
-                node = node.left;
-            } else {
-                if (node.right == null) {
-                    throw new IllegalArgumentException("[delete 23]: Value does not exist in tree.");
-                }
-                if (node.right.val == val) {
-                    Node right = node.right.right;
-                    node.right = node.right.left;
-                    insert(right);
-                    return val;
-                }
-                node = node.right;
-            }
+        return val;
+    }
+
+    private Node delete(Node node) {
+        if (node == null) {
+            return null;
         }
-        throw new IllegalArgumentException("[delete 36]: Value does not exist in tree.");
+        if (node.left == null) {
+            return node.right;
+        }
+        if (node.right == null) {
+            return node.left;
+        }
+        Node next = min(node.right);
+        next.left = node.left;
+        return node.right;
+    }
+
+    private Node min(Node node) {
+        while (node.left != null) {
+            node = node.left;
+        }
+        return node;
     }
 
     /**
+     * Time: O(n), where n is the number of nodes in the tree and all nodes are inserted in descending order.
+     * Space: O(1), constant.
      * For simplicity, do not allow duplicates
      * If val is already present, insert is a no-op
      * creates a new Node with data val in the appropriate location
@@ -123,32 +126,13 @@ public class BinarySearchTree implements BinarySearchTreeI {
         }
     }
 
-    /**
-     * Time: O(n), where n is the number of nodes in the tree and all nodes are inserted in descending order.
-     * Space: O(1), constant.
-     * @param child
-     */
-    private void insert(Node child) {
-        if (child == null) {
-            return;
-        }
-        if (root == null) {
-            root = child;
-            return;
-        }
-        Node prev = getParent(null, root, child.val);
-        if (prev != null) {
-            insertNode(prev, child);
-        }
-    }
-
     private Node getParent(Node prev, Node node, int val) {
-        while (node != null) {
-            if (node.val == val) {
-                return null;
-            }
+        while (node != null && node.val != val) {
             prev = node;
-            node = node.val > val ? node.left : node.right;
+            node = val < node.val ? node.left : node.right;
+        }
+        if (node != null && node.val == val) {
+            return null;
         }
         return prev;
     }
