@@ -1,5 +1,7 @@
 package career.prep.uber;
 
+import java.util.Objects;
+
 public class Node<T> {
     public T val;
     public Node<T> next;
@@ -29,10 +31,10 @@ public class Node<T> {
         this.next = next;
     }
 
-    public Node getNext() {
-        return this.next;
-    }
-
+    /**
+     * @param obj
+     * @return
+     */
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -45,8 +47,11 @@ public class Node<T> {
         return this.val == other.val;
     }
 
+    /**
+     * @return hash code
+     */
     @Override
     public int hashCode() {
-        return (int) this.val;
+        return Objects.hash(val, next);
     }
 }

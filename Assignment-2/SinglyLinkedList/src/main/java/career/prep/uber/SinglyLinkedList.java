@@ -130,7 +130,7 @@ public class SinglyLinkedList<T> implements SinglyLinkedListI<T> {
     /**
      * removes last Node<T> Node<T>
      * @param head
-     * @throws IllegalArgumentException if head is null.
+     * @throws IllegalArgumentException if head is null or the list only has 1 node.
      *
      * Time: In every case O(n), where n is the number of nodes in the list.
      *
@@ -141,11 +141,10 @@ public class SinglyLinkedList<T> implements SinglyLinkedListI<T> {
         if (head == null) {
             throw new IllegalArgumentException("[deleteBack: 2]: Head is null.");
         }
-        Node<T> curr = head;
-        if (curr.next == null) {
-            curr = null;
-            return;
+        if (head.next == null) {
+            throw new IllegalArgumentException("[deleteBack: 4]: List only has one node.");
         }
+        Node<T> curr = head;
         while(curr.next.next != null) {
             curr = curr.next;
         }
@@ -160,6 +159,8 @@ public class SinglyLinkedList<T> implements SinglyLinkedListI<T> {
      * @return returns head
      * @throws IllegalArgumentException if head or loc is null, or if loc does not exist in the list.
      *
+     * Instead of throwing an exception when loc is null, it might be more appropriate to simply return the head since deleting a null node doesn't make any sense.
+     *
      * Assumptions:
      *      That there are no duplicates, as stated in the problem.
      *      If there were duplicates, would iterate threw the entire list, removing every appearance of the node.
@@ -171,6 +172,7 @@ public class SinglyLinkedList<T> implements SinglyLinkedListI<T> {
      *
      * Questions:
      *      Could runtime be improved using slow and fast runners?
+     *      Does this method return a node in the case that the node to be deleted
      */
     @Override
     public Node<T> deleteNode(Node<T> head, Node<T> loc) {
@@ -181,13 +183,13 @@ public class SinglyLinkedList<T> implements SinglyLinkedListI<T> {
             throw new IllegalArgumentException("[deleteNode: 4]: loc is null.");
         }
         if (head.equals(loc)) {
-            return null;
+            return head.next;
         }
         Node<T> curr = head;
         while(curr.next != null && !curr.next.equals(loc)) {
             curr = curr.next;
         }
-        if (curr == null) {
+        if (curr.next == null || !curr.next.equals(loc)) {
             throw new IllegalArgumentException("[deleteNode: 15]: loc does not exist in list.");
         }
         curr.next = curr.next.next;
@@ -198,6 +200,7 @@ public class SinglyLinkedList<T> implements SinglyLinkedListI<T> {
      * @param head
      * @return returns length of the list.
      * If the head is null, return 0.
+     * It could also make sense to throw an IllegalArgumentException, but then the user could never check the size of an empty list.
      *
      * Time: In every case O(n), where n is the number of nodes in the list.
      *

@@ -1,225 +1,263 @@
 package career.prep.uber;
 import org.junit.Test;
-import org.junit.jupiter.api.DisplayName;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 public class SinglyLinkedListTests {
 
-    /**
-     * For simplicity, my tests assumed no duplicate nodes.
-     * Change tests to be more academic.
-     */
     @Test
-    @DisplayName("insertAtFront")
-    public void t1() {
-        final int N = 10;
+    public void insertAtFrontTest() {
         final SinglyLinkedListI<Integer> list = new SinglyLinkedList<>();
         Node<Integer> head = null;
-        for (int i = N; i >= 1; i--) {
-            Node<Integer> node = list.insertAtFront(head, i);
-            int actual = node.val;
-            assertEquals(i, actual);
-            assertEquals((N - i) + 1, list.length(node));
-            head = node;
-        }
-        assertOrder(1, N, head);
+
+        // 1st Insertion
+        Node<Integer> node1 = list.insertAtFront(head, 1);
+        assertLength(1, node1, list);
+        assertNodes(1, null, null, null, node1);
+        head = node1;
+
+        // 2nd Insertion
+        Node<Integer> node2 = list.insertAtFront(head, 2);
+        assertLength(2, node2, list);
+        assertNodes(2, 1, null, null, node2);
+        head = node2;
+
+        // 3rd Insertion
+        Node<Integer> node3 = list.insertAtFront(head, 3);
+        assertLength(3, node3, list);
+        assertNodes(3, 2, 1, null, node3);
     }
 
     @Test
-    @DisplayName("insertAtBack")
-    public void t2() {
-        final int N = 10;
+    public void insertAtBackTest() {
         final SinglyLinkedListI<Integer> list = new SinglyLinkedList<>();
-
-        Node<Integer> head = new Node<>(1);
-        assertEquals(1, list.length(head));
-
-        for (int i = 2; i <= N; i++) {
-            list.insertAtBack(head, i);
-            assertEquals(i, list.length(head));
-            assertOrder(1, i, head);
-        }
-    }
-
-    @Test
-    @DisplayName("insertAfter")
-    public void t3() {
-        final int N = 15;
-        final SinglyLinkedListI<Integer> list = new SinglyLinkedList<>();
-
-        Node<Integer> head = new Node<>(1);
-        assertEquals(1, list.length(head));
-
-        int third = N/3;
-        for (int i = 2; i <= third; i++) {
-            list.insertAtBack(head, i);
-            assertEquals(i, list.length(head));
-        }
-
-        int twoThirds = third * 2;
-        for (int i = twoThirds + 1; i <= N; i++) {
-            list.insertAtBack(head, i);
-            assertEquals(i - third, list.length(head));
-        }
-
-        int count = twoThirds;
-
-        for (int i = third + 1; i <= twoThirds; i++) {
-            list.insertAfter(head, i, new Node<>(i-1));
-            assertEquals(++count, list.length(head));
-        }
-        assertOrder(1, N, head);
-    }
-
-    @Test
-    @DisplayName("deleteFront")
-    public void t4() {
-        final int N = 10;
-        final SinglyLinkedListI<Integer> list = new SinglyLinkedList<>();
-
         Node<Integer> head = new Node<>(1);
 
-        for (int i = 2; i <= N; i++) {
-            list.insertAtBack(head, i);
-            assertEquals(i, list.length(head));
-        }
-        for (int i = 1; i <= N; i++) {
-            head = list.deleteFront(head);
-            assertEquals(N - i, list.length(head));
-            assertOrder(i+1, N, head);
-        }
-        // assertEquals(1, list.length(head));
+        // 1st Insertion
+        // It is impossible to insert a node at the back of an empty list.
+        assertLength(1, head, list);
+        assertNodes(1, null, null, null, head);
+
+        // 2nd Insertion
+        list.insertAtBack(head, 2);
+        assertLength(2, head, list);
+        assertNodes(1, 2, null, null, head);
+
+        // 3rd Insertion
+        list.insertAtBack(head, 3);
+        assertLength(3, head, list);
+        assertNodes(1, 2, 3, null, head);
     }
 
     @Test
-    @DisplayName("deleteFront")
-    public void t5() {
-        final int S = 1;
-        final int N = 15;
+    public void insertAfterTest() {
         final SinglyLinkedListI<Integer> list = new SinglyLinkedList<>();
+        Node<Integer> head = new Node<>(1);
 
-        Node<Integer> head = new Node<>(S);
+        // 1st Insertion
+        // It is impossible to insert a node at the back of an empty list.
+        assertLength(1, head, list);
+        assertNodes(1, null, null, null, head);
 
-        for (int i = S + 1; i <= N; i++) {
-            list.insertAtBack(head, i);
-            assertEquals(i, list.length(head));
-        }
+        // 2nd Insertion
+        list.insertAtBack(head, 3);
+        assertLength(2, head, list);
+        assertNodes(1, 3, null, null, head);
 
-        assertOrder(S, N, head);
-
-        for (int i = N - 1; i >= 1; i--) {
-            list.deleteBack(head);
-            assertEquals(i, list.length(head));
-            assertOrder(S, i, head);
-        }
+        // 3rd Insertion
+        list.insertAfter(head, 2, head);
+        assertLength(3, head, list);
+        assertNodes(1, 2, 3, null, head);
     }
 
     @Test
-    @DisplayName("deleteNode")
-    public void t6() {
-        final int S = 1;
-        final int N = 15;
+    public void deleteFrontTest() {
         final SinglyLinkedListI<Integer> list = new SinglyLinkedList<>();
 
-        Node<Integer> head = new Node<>(S);
+        // Insert 3 nodes: 1, 2, 3
+        Node<Integer> head = new Node<>(1);
+        list.insertAtBack(head, 2);
+        list.insertAtBack(head, 3);
 
-        for (int i = S + 1; i <= N; i++) {
-            list.insertAtBack(head, i);
-            assertEquals(i, list.length(head));
-        }
+        // Before removing any nodes
+        assertLength(3, head, list);
+        assertNodes(1, 2, 3, null, head);
 
-        assertOrder(S, N, head);
+        // 1st removal
+        head = list.deleteFront(head);
+        assertLength(2, head, list);
+        assertNodes(2, 3, null, null, head);
 
-        int count = N;
-        int startAt = S + 3;
-        for (int i = startAt; i < N; i++) {
-            list.deleteNode(head, new Node<>(i));
-            assertEquals(--count, list.length(head));
-            assertOrder(S, startAt - 1, i + 1, N, head);
-        }
+        // 2nd removal
+        head = list.deleteFront(head);
+        assertLength(1, head, list);
+        assertNodes(3, null, null, null, head);
+
+        // 3rd removal
+        head = list.deleteFront(head);
+        assertLength(0, head, list);
+        assertNodes(null, null, null, null, head);
     }
 
     @Test
-    @DisplayName("reverseIterative")
-    public void t7() {
-        final int S = 1;
-        final int N = 15;
+    public void deleteBackTest() {
         final SinglyLinkedListI<Integer> list = new SinglyLinkedList<>();
 
-        Node<Integer> head = new Node<>(S);
+        // Insert 3 nodes: 1, 2, 3
+        Node<Integer> head = new Node<>(1);
+        list.insertAtBack(head, 2);
+        list.insertAtBack(head, 3);
 
-        for (int i = S + 1; i <= N; i++) {
-            list.insertAtBack(head, i);
-            assertEquals(i, list.length(head));
-        }
+        // Before removing any nodes
+        assertLength(3, head, list);
+        assertNodes(1, 2, 3, null, head);
 
-        assertOrder(S, N, head);
+        // 1st removal
+        list.deleteBack(head);
+        assertLength(2, head, list);
+        assertNodes(1, 2, null, null, head);
 
-        head = list.reverseIterative(head);
-        assertDescendingOrder(S, N, head);
+        // 2nd removal
+        list.deleteBack(head);
+        assertLength(1, head, list);
+        assertNodes(1, null, null, null, head);
+
+        // It is impossible to delete back if the list only has one node.
     }
 
     @Test
-    @DisplayName("reverseRecursive")
-    public void t8() {
-        final int S = 1;
-        final int N = 15;
+    public void deleteNodeTest() {
         final SinglyLinkedListI<Integer> list = new SinglyLinkedList<>();
 
-        Node<Integer> head = new Node<>(S);
+        // Insert 3 nodes: 1, 2, 3
+        Node<Integer> head = new Node<>(1);
+        list.insertAtBack(head, 2);
+        list.insertAtBack(head, 3);
 
-        for (int i = S + 1; i <= N; i++) {
-            list.insertAtBack(head, i);
-            assertEquals(i, list.length(head));
-        }
+        // Before removing any nodes
+        assertLength(3, head, list);
+        assertNodes(1, 2, 3, null, head);
 
-        assertOrder(S, N, head);
+        // Remove 2nd node
+        Node<Integer> secondNode = head.next;
+        head = list.deleteNode(head, secondNode);
+        assertLength(2, head, list);
+        assertNodes(1, 3, null, null, head);
 
-        head = list.reverseRecursive(head);
-        assertDescendingOrder(S, N, head);
+        // Remove 1st node
+        Node<Integer> firstNode = head;
+        head = list.deleteNode(head, firstNode);
+        assertLength(1, head, list);
+        assertNodes(3, null, null, null, head);
+
+        // Remove 3rd node
+        Node<Integer> thirdNode = head;
+        head = list.deleteNode(head, thirdNode);
+        assertLength(0, head, list);
+        assertNodes(null, null, null, null, head);
     }
 
-    private void assertOrder(int S, int M1, int M2, int N, Node head) {
-        Node curr = head;
-        for (int i = S; i <= M1; i++) {
-            System.out.println(curr.val);
-            assertEquals(i, curr.val);
-            curr = curr.getNext();
-        }
-        for (int i = M2; i <= N; i++) {
-            System.out.println(curr.val);
-            assertEquals(i, curr.val);
-            curr = curr.getNext();
-        }
-        System.out.println();
+    @Test
+    public void deleteNodeThatDoesNotExistsTest() {
+        final SinglyLinkedListI<Integer> list = new SinglyLinkedList<>();
+
+        // Insert 3 nodes: 1, 2, 3
+        Node<Integer> head = new Node<>(1);
+        list.insertAtBack(head, 2);
+        list.insertAtBack(head, 3);
+
+        // Before removing any nodes
+        assertLength(3, head, list);
+        assertNodes(1, 2, 3, null, head);
+
+        // Remove 2nd node
+        Node<Integer> node = new Node<>(4);
+        assertThrows(IllegalArgumentException.class, () -> list.deleteNode(head, node));
     }
 
-    private void assertOrder(int S, int N, Node head) {
-        Node curr = head;
-        for (int i = S; i <= N; i++) {
-            System.out.println(curr.val);
-            assertEquals(i, curr.val);
-            curr = curr.getNext();
-        }
-        System.out.println();
+    @Test
+    public void reverseIterativeTest() {
+        final SinglyLinkedListI<Integer> list = new SinglyLinkedList<>();
+
+        // Insert 3 nodes: 1, 2, 3
+        Node<Integer> head = new Node<>(1);
+        list.insertAtBack(head, 2);
+        list.insertAtBack(head, 3);
+
+        // Before removing any nodes
+        assertLength(3, head, list);
+        assertNodes(1, 2, 3, null, head);
+
+        Node<Integer> reversedHead = list.reverseIterative(head);
+        assertLength(3, reversedHead, list);
+        assertNodes(3, 2, 1, null, reversedHead);
     }
 
-    private void assertDescendingOrder(int S, int N, Node head) {
-        Node curr = head;
-        for (int i = N; i >= S; i--) {
-            System.out.println(curr.val);
-            assertEquals(i, curr.val);
-            curr = curr.getNext();
-        }
-        System.out.println();
+    @Test
+    public void reverseRecursiveTest() {
+        final SinglyLinkedListI<Integer> list = new SinglyLinkedList<>();
+
+        // Insert 3 nodes: 1, 2, 3
+        Node<Integer> head = new Node<>(1);
+        list.insertAtBack(head, 2);
+        list.insertAtBack(head, 3);
+
+        // Before removing any nodes
+        assertLength(3, head, list);
+        assertNodes(1, 2, 3, null, head);
+
+        Node<Integer> reversedHead = list.reverseRecursive(head);
+        assertLength(3, reversedHead, list);
+        assertNodes(3, 2, 1, null, reversedHead);
     }
 
-
-    private void printList(Node head) {
-        Node curr = head;
-        while (curr != null) {
-            System.out.println(curr.val);
-            curr = curr.getNext();
+    /**
+     * Helper Methods
+     * @param expected1
+     * @param expected2
+     * @param expected3
+     * @param expected4
+     * @param head
+     */
+    private void assertNodes(final Integer expected1, final Integer expected2, final Integer expected3, final Integer expected4, final Node<Integer> head) {
+        // 1st Node
+        assertValue(expected1, head);
+        // 2nd Node
+        if (expected1 != null) {
+            assertValue(expected2, head.next);
         }
-        System.out.println();
+        // 3rd Node
+        if (expected2 != null) {
+            assertValue(expected3, head.next.next);
+        }
+        // 4th Node
+        if (expected3 != null) {
+            assertValue(expected4, head.next.next.next);
+        }
+    }
+
+    /**
+     * @param expected
+     * @param node
+     * @param list
+     */
+    private void assertLength(final int expected, Node<Integer> node, final SinglyLinkedListI<Integer> list) {
+        final int actual = list.length(node);
+        assertEquals(expected, actual);
+    }
+
+    /**
+     * @param expected
+     * @param node
+     */
+    private void assertValue(final Integer expected, Node<Integer> node) {
+        if (expected == null) {
+            assertNull(node);
+        } else {
+            assertNotNull(node);
+            final Integer actual = node.val;
+            assertEquals(expected, actual);
+        }
     }
 }
