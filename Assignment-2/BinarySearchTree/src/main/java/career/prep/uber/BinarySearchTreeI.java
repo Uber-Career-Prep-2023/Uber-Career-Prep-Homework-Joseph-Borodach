@@ -27,7 +27,7 @@ public interface BinarySearchTreeI {
     /**
      * deletes the Node with data val, if it exists
      * @param val
-     * @return
+     * @return the value of the deleted node
      */
     int delete(int val);
 
