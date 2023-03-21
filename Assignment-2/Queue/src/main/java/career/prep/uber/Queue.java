@@ -1,9 +1,8 @@
 package career.prep.uber;
 
-public class Queue<T> implements QueueI<T> {
+public class Queue<T> extends SinglyLinkedList<T> implements QueueI<T> {
     private Node<T> back;
     private Node<T> front;
-    private SinglyLinkedList<T> linkedList;
 
     /**
      * Constructor.
@@ -11,7 +10,6 @@ public class Queue<T> implements QueueI<T> {
     public Queue() {
         back = null;
         front = null;
-        linkedList = new SinglyLinkedList<>();
     }
 
     /**
@@ -41,10 +39,10 @@ public class Queue<T> implements QueueI<T> {
             throw new IllegalArgumentException("[enqueue: 2]: Value is null.");
         }
         if (back == null) {
-            front = linkedList.insertAtFront(null, x);
+            front = insertAtFront(null, x);
             back = front;
         } else {
-            linkedList.insertAtBack(back, x);
+            insertAtBack(back, x);
             back = back.next;
         }
     }
@@ -62,7 +60,7 @@ public class Queue<T> implements QueueI<T> {
             throw new IllegalArgumentException("[dequeue: 2]: Queue is empty.");
         }
         Node<T> firstNode = new Node<>(front);
-        front = linkedList.deleteFront(front);
+        front = deleteFront(front);
         return firstNode.val;
     }
 
