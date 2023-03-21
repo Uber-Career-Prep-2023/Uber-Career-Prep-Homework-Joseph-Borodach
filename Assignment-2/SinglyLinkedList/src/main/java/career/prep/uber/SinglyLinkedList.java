@@ -24,9 +24,9 @@ public class SinglyLinkedList<T> implements SinglyLinkedListI<T> {
      * @return returns new head
      * @throws IllegalArgumentException if val is null.
      *
-     * Time: In every case, constant, O(1).
+     * Time: In every case, O(1), constant.
      *
-     * Space: Constant, O(1).
+     * Space: O(1), constant.
      */
     @Override
     public Node<T> insertAtFront(Node<T> head, T val) {
@@ -80,7 +80,7 @@ public class SinglyLinkedList<T> implements SinglyLinkedListI<T> {
      * Time: In the worst case, O(n), where n is the number of nodes in the list.
      *      When loc is at the end of the list.
      *
-     * Space: Constant, O(1).
+     * Space: O(1), constant.
      *
      * Questions:
      *      Could runtime be improved using slow and fast runners?
@@ -117,7 +117,7 @@ public class SinglyLinkedList<T> implements SinglyLinkedListI<T> {
      *
      * Time: In every case, constant, O(1).
      *
-     * Space: Constant, O(1).
+     * Space: O(1), constant.
      */
     @Override
     public Node<T> deleteFront(Node<T> head) {
@@ -134,7 +134,7 @@ public class SinglyLinkedList<T> implements SinglyLinkedListI<T> {
      *
      * Time: In every case O(n), where n is the number of nodes in the list.
      *
-     * Space: Constant, O(1).
+     * Space: O(1), constant.
      */
     @Override
     public void deleteBack(Node<T> head) {
@@ -168,7 +168,7 @@ public class SinglyLinkedList<T> implements SinglyLinkedListI<T> {
      * Time: In the worst case, O(n), where n is the number of nodes in the list.
      *      When loc is at the end of the list.
      *
-     * Space: Constant, O(1).
+     * Space: O(1), constant.
      *
      * Questions:
      *      Could runtime be improved using slow and fast runners?
@@ -204,9 +204,7 @@ public class SinglyLinkedList<T> implements SinglyLinkedListI<T> {
      *
      * Time: In every case O(n), where n is the number of nodes in the list.
      *
-     * Space: Constant, O(1).
-     *      Originally, wrote an implementation using a stack, which was O(n).
-     *      But, then, realized that was just immitating the recursive stack and not truly reversing the list iteratively.
+     * Space: O(1), constant.
      */
     @Override
     public int length(Node<T> head) {
@@ -223,10 +221,11 @@ public class SinglyLinkedList<T> implements SinglyLinkedListI<T> {
      * Reverses the linked list iteratively
      * @param head
      * @return the other end of the list, which will be the new head after reversing the list.
+     * @throws IllegalArgumentException if head is null.
      *
      * Time: In every case O(n), where n is the number of nodes in the list.
      *
-     * Space: Constant, O(1).
+     * Space: O(1), constant.
      *      Originally, wrote an implementation using a stack, which was O(n).
      *      But, then, realized that was just immitating the recursive stack and not truly reversing the list iteratively.
      */
@@ -250,6 +249,7 @@ public class SinglyLinkedList<T> implements SinglyLinkedListI<T> {
      * Reverses the linked list recursively (Hint: you will need a helper function)
      * @param head
      * @return the other end of the list, which will be the new head after reversing the list.
+     * @throws IllegalArgumentException if head is null.
      *
      * Time: In every case O(n), where n is the number of nodes in the list.
      * Space: In every case O(n), where n is the number of nodes in the list.
