@@ -19,6 +19,10 @@ package career.prep.uber;
  */
 public class BinarySearchTree implements BinarySearchTreeI {
     private Node root;
+
+    /**
+     * Constructor
+     */
     public BinarySearchTree() {
         root = null;
     }
