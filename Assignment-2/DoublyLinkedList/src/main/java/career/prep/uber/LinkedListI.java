@@ -1,6 +1,6 @@
 package career.prep.uber;
 
-public interface DoublyLinkedListI<T> {
+public interface LinkedListI<T> {
     /**
      * creates new Node with data val at front
      * @param head

@@ -4,7 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-public class DoublyLinkedListTests {
+public class OriginalTests {
     @Test
     @DisplayName("insertAtFront")
     public void t1() {

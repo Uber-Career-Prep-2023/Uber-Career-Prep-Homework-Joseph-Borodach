@@ -15,7 +15,7 @@ public class TestsWithLoops {
     @DisplayName("insertAtFront")
     public void t1() {
         final int N = 10;
-        final SinglyLinkedListI<Integer> list = new SinglyLinkedList<>();
+        final LinkedListI<Integer> list = new SinglyLinkedList<>();
         Node<Integer> head = null;
         for (int i = N; i >= 1; i--) {
             Node<Integer> node = list.insertAtFront(head, i);
@@ -31,7 +31,7 @@ public class TestsWithLoops {
     @DisplayName("insertAtBack")
     public void t2() {
         final int N = 10;
-        final SinglyLinkedListI<Integer> list = new SinglyLinkedList<>();
+        final LinkedListI<Integer> list = new SinglyLinkedList<>();
 
         Node<Integer> head = new Node<>(1);
         assertEquals(1, list.length(head));
@@ -47,7 +47,7 @@ public class TestsWithLoops {
     @DisplayName("insertAfter")
     public void t3() {
         final int N = 15;
-        final SinglyLinkedListI<Integer> list = new SinglyLinkedList<>();
+        final LinkedListI<Integer> list = new SinglyLinkedList<>();
 
         Node<Integer> head = new Node<>(1);
         assertEquals(1, list.length(head));
@@ -77,7 +77,7 @@ public class TestsWithLoops {
     @DisplayName("deleteFront")
     public void t4() {
         final int N = 10;
-        final SinglyLinkedListI<Integer> list = new SinglyLinkedList<>();
+        final LinkedListI<Integer> list = new SinglyLinkedList<>();
 
         Node<Integer> head = new Node<>(1);
 
@@ -98,7 +98,7 @@ public class TestsWithLoops {
     public void t5() {
         final int S = 1;
         final int N = 15;
-        final SinglyLinkedListI<Integer> list = new SinglyLinkedList<>();
+        final LinkedListI<Integer> list = new SinglyLinkedList<>();
 
         Node<Integer> head = new Node<>(S);
 
@@ -121,7 +121,7 @@ public class TestsWithLoops {
     public void t6() {
         final int S = 1;
         final int N = 15;
-        final SinglyLinkedListI<Integer> list = new SinglyLinkedList<>();
+        final LinkedListI<Integer> list = new SinglyLinkedList<>();
 
         Node<Integer> head = new Node<>(S);
 
@@ -146,7 +146,7 @@ public class TestsWithLoops {
     public void t7() {
         final int S = 1;
         final int N = 15;
-        final SinglyLinkedListI<Integer> list = new SinglyLinkedList<>();
+        final LinkedListI<Integer> list = new SinglyLinkedList<>();
 
         Node<Integer> head = new Node<>(S);
 
@@ -166,7 +166,7 @@ public class TestsWithLoops {
     public void t8() {
         final int S = 1;
         final int N = 15;
-        final SinglyLinkedListI<Integer> list = new SinglyLinkedList<>();
+        final LinkedListI<Integer> list = new SinglyLinkedList<>();
 
         Node<Integer> head = new Node<>(S);
 

@@ -16,7 +16,7 @@ package career.prep.uber;
  * Questions:
  *      None
  */
-public class SinglyLinkedList<T> implements SinglyLinkedListI<T> {
+public class SinglyLinkedList<T> implements LinkedListI<T> {
     /**
      * Creates new Node<T> with data val at front
      * @param head
@@ -144,11 +144,13 @@ public class SinglyLinkedList<T> implements SinglyLinkedListI<T> {
         if (head.next == null) {
             throw new IllegalArgumentException("[deleteBack: 4]: List only has one node.");
         }
+        Node<T> prev = null;
         Node<T> curr = head;
-        while(curr.next.next != null) {
+        while(curr.next != null) {
+            prev = curr;
             curr = curr.next;
         }
-        curr.next = null;
+        prev.next = null;
 
     }
 
@@ -185,14 +187,16 @@ public class SinglyLinkedList<T> implements SinglyLinkedListI<T> {
         if (head.equals(loc)) {
             return head.next;
         }
+        Node<T> prev = null;
         Node<T> curr = head;
-        while(curr.next != null && !curr.next.equals(loc)) {
+        while(curr != null && !curr.equals(loc)) {
+            prev = curr;
             curr = curr.next;
         }
-        if (curr.next == null || !curr.next.equals(loc)) {
+        if (curr == null || !curr.equals(loc)) {
             throw new IllegalArgumentException("[deleteNode: 15]: loc does not exist in list.");
         }
-        curr.next = curr.next.next;
+        prev.next = curr.next;
         return head;
     }
 
@@ -205,6 +209,9 @@ public class SinglyLinkedList<T> implements SinglyLinkedListI<T> {
      * Time: In every case O(n), where n is the number of nodes in the list.
      *
      * Space: O(1), constant.
+     *
+     * Questions:
+     *      Could the runtime be decreased to O(log n), by using a fast runner?
      */
     @Override
     public int length(Node<T> head) {
