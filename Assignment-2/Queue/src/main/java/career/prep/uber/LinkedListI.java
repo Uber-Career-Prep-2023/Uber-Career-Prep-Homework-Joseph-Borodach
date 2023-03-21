@@ -7,9 +7,9 @@ package career.prep.uber;
  * For simplicity, you can make your nodes store integers rather than generic data types.
  * In each of the methods, you should use pointers in languages that support pointers (e.g., Node<T> * in C++) or a reference in languages that support references (e.g., Python).
  */
-public interface SinglyLinkedListI<T> {
+public interface LinkedListI<T> {
     /**
-     * creates new Node<T> with data val at front
+     * Creates new Node<T> with data val at front
      * @param head
      * @param val
      * @return returns new head
@@ -51,24 +51,23 @@ public interface SinglyLinkedListI<T> {
      * @param loc
      * @return returns head
      */
-    Node<T> deleteNode(Node<T> head, Node<T> loc);
+    Node<T> deleteNode (Node<T> head, Node<T> loc);
 
     /**
-     * returns length of the list
      * @param head
-     * @return
+     * @return the length of the linked list.
      */
     int length(Node<T> head);
 
     /**
-     * reverses the linked list iteratively
+     * Reverses the linked list iteratively
      * @param head
      * @return
      */
     Node<T> reverseIterative(Node<T> head);
 
     /**
-     * reverses the linked list recursively (Hint: you will need a helper function)
+     * Reverses the linked list recursively (Hint: you will need a helper function)
      * @param head
      * @return
      */

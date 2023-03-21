@@ -1,33 +1,45 @@
 package career.prep.uber;
 
-public class Queue<T> extends Util<T> implements QueueI<T> {
-    public Node<T> front, back;
+public class Queue<T> implements QueueI<T> {
+    private Node<T> back;
+    private Node<T> front;
     private SinglyLinkedList<T> linkedList;
 
+    /**
+     * Constructor.
+     */
     public Queue() {
-        linkedList = new SinglyLinkedList<>();
-        front = null;
         back = null;
+        front = null;
+        linkedList = new SinglyLinkedList<>();
     }
 
     /**
-     * Time: O(1), constant.
      * @return returns the first item in the queue
+     *
+     * Time: O(1), constant.
+     *
+     * Space: O(1), constant.
      */
     public T peek() {
         if (isEmpty()) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("[peek: 2]: Queue is empty.");
         }
         return back.val;
     }
 
     /**
-     * Time: O(1), constant.
      * "adds x to the back of the queue"
      * @param x
+     *
+     * Time: O(1), constant.
+     *
+     * Space: O(1), constant.
      */
     public void enqueue(T x) {
-        verify(x);
+        if (x == null) {
+            throw new IllegalArgumentException("[enqueue: 2]: Value is null.");
+        }
         if (back == null) {
             front = linkedList.insertAtFront(null, x);
             back = front;
@@ -38,13 +50,16 @@ public class Queue<T> extends Util<T> implements QueueI<T> {
     }
 
     /**
-     * Time: O(1), constant.
      * Remove the head of the linked list.
      * @return removes and returns the first item in the queue
+     *
+     * Time: O(1), constant.
+     *
+     * Space: O(1), constant.
      */
     public T dequeue() {
         if (isEmpty()) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("[dequeue: 2]: Queue is empty.");
         }
         Node<T> firstNode = new Node<>(front);
         front = linkedList.deleteFront(front);
@@ -52,8 +67,11 @@ public class Queue<T> extends Util<T> implements QueueI<T> {
     }
 
     /**
-     * Time: O(1), constant.
      * @return returns a boolean indicating whether the queue is empt
+     *
+     * Time: O(1), constant.
+     *
+     * Space: O(1), constant.
      */
     public boolean isEmpty() {
         return front == null;
