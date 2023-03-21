@@ -1,7 +1,9 @@
 package career.prep.uber;
+
 import org.junit.Test;
 import static org.junit.Assert.*;
-public class LinkedListTests extends SinglyLinkedListMethods {
+
+public class LinkedListTests extends DoublyLinkedListMethods {
 
     @Test
     public void insertAtFrontTest() {

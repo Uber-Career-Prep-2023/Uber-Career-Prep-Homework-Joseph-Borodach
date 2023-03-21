@@ -1,18 +1,19 @@
 package career.prep.uber;
 
-public class Node<T> extends Util {
-    public T val;
-    public Node<T> prev, next;
-    public Node(T val) {
-        this(val, null, null);
-    }
+import java.util.Objects;
 
-    public Node(T val, Node<T> next) {
-        this(val, null, next);
+public class Node<T> {
+    public T val;
+    public Node<T> prev;
+    public Node<T> next;
+
+    public Node(T val) {
+        this.prev = null;
+        this.next = null;
+        this.val = val;
     }
 
     public Node(T val, Node<T> prev, Node<T> next) {
-        verify(val);
         this.prev = prev;
         this.next = next;
         this.val = val;
@@ -32,6 +33,6 @@ public class Node<T> extends Util {
 
     @Override
     public int hashCode() {
-        return (int) this.val;
+        return Objects.hash(val, next);
     }
 }
