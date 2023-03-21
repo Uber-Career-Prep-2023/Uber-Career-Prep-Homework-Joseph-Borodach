@@ -9,7 +9,7 @@ package career.prep.uber;
  */
 public interface SinglyLinkedListI<T> {
     /**
-     * creates new Node<T> with data val at front
+     * Creates new Node<T> with data val at front
      * @param head
      * @param val
      * @return returns new head
@@ -54,21 +54,20 @@ public interface SinglyLinkedListI<T> {
     Node<T> deleteNode (Node<T> head, Node<T> loc);
 
     /**
-     * returns length of the list
      * @param head
-     * @return
+     * @return the length of the linked list.
      */
     int length(Node<T> head);
 
     /**
-     * reverses the linked list iteratively
+     * Reverses the linked list iteratively
      * @param head
      * @return
      */
     Node<T> reverseIterative(Node<T> head);
 
     /**
-     * reverses the linked list recursively (Hint: you will need a helper function)
+     * Reverses the linked list recursively (Hint: you will need a helper function)
      * @param head
      * @return
      */

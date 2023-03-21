@@ -6,6 +6,7 @@ public class SinglyLinkedListTests {
 
     /**
      * For simplicity, my tests assumed no duplicate nodes.
+     * Change tests to be more academic.
      */
     @Test
     @DisplayName("insertAtFront")

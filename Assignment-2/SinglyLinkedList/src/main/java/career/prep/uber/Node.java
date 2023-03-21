@@ -1,19 +1,31 @@
 package career.prep.uber;
 
-public class Node<T> extends Util {
+public class Node<T> {
     public T val;
-    private Node<T> next;
+    public Node<T> next;
+
+    /**
+     * @param val
+     * @throws IllegalArgumentException if val is null.
+     */
     public Node(T val) {
-        verify(val);
+        if (val == null) {
+            throw new IllegalArgumentException("[Node: 2]: val is null.");
+        }
         this.val = val;
     }
 
+    /**
+     * @param val
+     * @param next
+     * @throws IllegalArgumentException if val is null.
+     * An exception was not thrown if next was null. However, that too would make sense.
+     */
     public Node(T val, Node<T> next) {
-        this(val);
-        this.next = next;
-    }
-
-    public void setNext(Node<T> next) {
+        if (val == null) {
+            throw new IllegalArgumentException("[Node: 2]: val is null.");
+        }
+        this.val = val;
         this.next = next;
     }
 
