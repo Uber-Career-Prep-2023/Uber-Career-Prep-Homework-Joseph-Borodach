@@ -89,6 +89,7 @@ public class IsBST<T extends Comparable<? super T>> implements IsBSTI<T> {
      * @return if the tree is a valid binary search tree.
      * @throws IllegalArgumentException if the root is null.
      */
+    @Override
     public boolean solveIt(Node<T> root) {
         if (root == null) {
             throw new IllegalArgumentException("[solveIt: 2]: Root cannot be null");
