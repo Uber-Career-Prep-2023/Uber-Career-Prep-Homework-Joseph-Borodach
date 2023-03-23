@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
 public class CopyTreeTests {
 
     /**
-     * This test case creates a two-level binary tree and checks whether the copied tree has the same structure and values as the original tree.
+     * Creates a two-level binary tree and checks whether the copied tree has the same structure and values as the original tree.
      */
     @Test
     public void twoLevelTest() {
@@ -25,7 +25,7 @@ public class CopyTreeTests {
     }
 
     /**
-     * This test case creates a three-level binary tree and checks whether the copied tree has the same structure and values as the original tree.
+     * Creates a three-level binary tree and checks whether the copied tree has the same structure and values as the original tree.
      */
     @Test
     public void threeLevelTest() {
@@ -45,7 +45,7 @@ public class CopyTreeTests {
     }
 
     /**
-     * This test case creates a binary tree with a null child node and checks whether the copied tree has the same structure and values as the original tree.
+     * Creates a binary tree with a null child node and checks whether the copied tree has the same structure and values as the original tree.
      */
     @Test
     public void nullChildTest() {
@@ -59,7 +59,7 @@ public class CopyTreeTests {
     }
 
     /**
-     * This test case creates a binary tree with negative values and checks whether the copied tree has the same structure and values as the original tree.
+     * Creates a binary tree with negative values and checks whether the copied tree has the same structure and values as the original tree.
      */
     @Test
     public void negativeTest() {
@@ -77,7 +77,7 @@ public class CopyTreeTests {
     }
 
     /**
-     * This test case creates a binary tree with duplicate values and checks whether the copied tree has the same structure and values as the original tree.
+     * Creates a binary tree with duplicate values and checks whether the copied tree has the same structure and values as the original tree.
      */
     @Test
     public void duplicateValuesTest() {
@@ -95,7 +95,7 @@ public class CopyTreeTests {
     }
 
     /**
-     * This test case creates a binary tree with string values and checks whether the copied tree has the same structure and values as the original tree.
+     * Creates a binary tree with string values and checks whether the copied tree has the same structure and values as the original tree.
      */
     @Test
     public void stringTreeTest() {
@@ -111,7 +111,7 @@ public class CopyTreeTests {
     }
 
     /**
-     * This test case creates an unbalanced binary tree and checks whether the copied tree has the same structure and values as the original tree.
+     * Creates an unbalanced binary tree and checks whether the copied tree has the same structure and values as the original tree.
      */
     @Test
     public void unbalancedTreeTest() {
@@ -133,7 +133,7 @@ public class CopyTreeTests {
     }
 
     /**
-     * This test case creates a large binary tree with 127 nodes and checks whether the copied tree has the same structure and values as the original tree.
+     * Creates a large binary tree with 127 nodes and checks whether the copied tree has the same structure and values as the original tree.
      */
     @Test
     public void largeTreeTest() {
