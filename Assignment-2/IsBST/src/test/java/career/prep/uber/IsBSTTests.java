@@ -3,203 +3,161 @@ package career.prep.uber;
 import org.junit.Test;
 
 import java.util.Queue;
-import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.concurrent.ThreadLocalRandom;
 
 import static org.junit.Assert.*;
 
-public class CopyTreeTests {
+public class IsBSTTests {
 
     /**
-     * This test case creates a two-level binary tree and checks whether the copied tree has the same structure and values as the original tree.
+     * Creates a valid bst and checks that the solution returns true.
      */
     @Test
-    public void twoLevelTest() {
+    public void validTwoLevelTest() {
+        Node<Integer> root = new Node<>(2);
+        root.left = new Node<>(1);
+        root.right = new Node<>(3);
+
+        isValid(root, true);
+    }
+
+    /**
+     * Creates an invalid bst where the left child is greater than its parent and checks that the solution returns false.
+     */
+    @Test
+    public void invalidLeftChildTest() {
         Node<Integer> root = new Node<>(1);
         root.left = new Node<>(2);
         root.right = new Node<>(3);
 
-        final Node<Integer> copyRoot = new CopyTree<Integer>().solveIt(root);
-
-        compare(root, copyRoot);
+        isValid(root, false);
     }
 
     /**
-     * This test case creates a three-level binary tree and checks whether the copied tree has the same structure and values as the original tree.
+     * Creates an invalid bst where the right child is less than its parent
+     * and checks that the solution returns false.
      */
     @Test
-    public void threeLevelTest() {
-        Node<Integer> root = new Node<>(1);
-        root.left = new Node<>(2);
-        root.right = new Node<>(3);
-        root.left.left = new Node<>(4);
-        root.left.right = new Node<>(6);
-        root.right.left = new Node<>(5);
-        root.right.right = new Node<>(7);
+    public void invalidRightChildTest() {
+        Node<Integer> root = new Node<>(3);
+        root.left = new Node<>(1);
+        root.right = new Node<>(2);
 
-        final Node<Integer> copyRoot = new CopyTree<Integer>().solveIt(root);
-
-        compare(root, copyRoot);
-        compare(root.left, copyRoot.left);
-        compare(root.right, copyRoot.right);
+        isValid(root, false);
     }
 
     /**
-     * This test case creates a binary tree with a null child node and checks whether the copied tree has the same structure and values as the original tree.
+     * Creates a valid bst where the right child is equal to its parent and checks that the solution returns true.
      */
     @Test
-    public void nullChildTest() {
-        Node<Integer> root = new Node<>(1);
-        root.left = new Node<>(2);
+    public void validEqualChildTest() {
+        Node<Integer> root = new Node<>(2);
+        root.left = new Node<>(1);
+        root.right = new Node<>(2);
 
-        final Node<Integer> copyRoot = new CopyTree<Integer>().solveIt(root);
-
-        compare(root, copyRoot);
-        compare(root.left, copyRoot.left);
+        isValid(root, true);
     }
 
     /**
-     * This test case creates a binary tree with negative values and checks whether the copied tree has the same structure and values as the original tree.
+     * Creates a valid bst of data type double and checks that the solution returns true.
      */
     @Test
-    public void negativeTest() {
-        Node<Integer> root = new Node<>(1);
-        root.left = new Node<>(-4);
-        root.right = new Node<>(3);
-        root.left.left = new Node<>(-1);
-        root.right.right = new Node<>(5);
+    public void validDoubleTests() {
+        Node<Double> root = new Node<>(1.6);
+        root.left = new Node<>(1.5);
+        root.right = new Node<>(1.7);
 
-        final Node<Integer> copyRoot = new CopyTree<Integer>().solveIt(root);
-
-        compare(root, copyRoot);
-        compare(root.left, copyRoot.left);
-        compare(root.right, copyRoot.right);
+        isValid(root, true);
     }
 
     /**
-     * This test case creates a binary tree with duplicate values and checks whether the copied tree has the same structure and values as the original tree.
+     * Creates a invalid bst of data type double and checks that the solution returns true.
      */
     @Test
-    public void duplicateValuesTest() {
-        Node<Integer> root = new Node<>(1);
-        root.left = new Node<>(3);
-        root.right = new Node<>(3);
-        root.left.left = new Node<>(5);
-        root.right.right = new Node<>(5);
+    public void invalidDoubleTests() {
+        Node<Double> root = new Node<>(1.5);
+        root.left = new Node<>(1.6);
+        root.right = new Node<>(1.7);
 
-        final Node<Integer> copyRoot = new CopyTree<Integer>().solveIt(root);
-
-        compare(root, copyRoot);
-        compare(root.left, copyRoot.left);
-        compare(root.right, copyRoot.right);
+        isValid(root, false);
     }
 
     /**
-     * This test case creates a binary tree with string values and checks whether the copied tree has the same structure and values as the original tree.
+     * Creates a valid bst of data type char and checks that the solution returns true.
      */
     @Test
-    public void stringTreeTest() {
+    public void validCharTests() {
+        Node<Character> root = new Node<>('b');
+        root.left = new Node<>('a');
+        root.right = new Node<>('c');
+
+        isValid(root, true);
+    }
+
+    /**
+     * Creates an invalid bst of data type char and checks that the solution returns true.
+     */
+    @Test
+    public void invalidCharTests() {
+        Node<Character> root = new Node<>('a');
+        root.left = new Node<>('b');
+        root.right = new Node<>('c');
+
+        isValid(root, false);
+    }
+
+    /**
+     * Confirms that strings don't work, since it is not possible to compare strings given the current specs.
+     */
+    @Test
+    public void stringTests() {
         Node<String> root = new Node<>("Hello");
-        root.left = new Node<>("World");
-        root.right = new Node<>("!");
-
-        final Node<String> copyRoot = new CopyTree<String>().solveIt(root);
-
-        compare(root, copyRoot);
-        compare(root.left, copyRoot.left);
-        compare(root.right, copyRoot.right);
+        assertThrows(IllegalArgumentException.class, () -> new IsBST().solveIt(root));
     }
 
     /**
-     * This test case creates an unbalanced binary tree and checks whether the copied tree has the same structure and values as the original tree.
+     * Creates a large valid bst and checks that the solution returns true.
      */
     @Test
-    public void unbalancedTreeTest() {
-        Node<Integer> root = new Node<>(1);
-        root.left = new Node<>(2);
-        root.right = new Node<>(3);
-        root.left.left = new Node<>(4);
-        root.left.left.left = new Node<>(8);
-        root.left.left.left.left = new Node<>(9);
+    public void largeTest() {
+        Node<Integer> root = new Node<>(0);
+        Queue<Node<Integer>> queue = new LinkedList<>();
+        queue.add(root);
 
-        final Node<Integer> copyRoot = new CopyTree<Integer>().solveIt(root);
-
-        compare(root, copyRoot);
-        compare(root.left, copyRoot.left);
-        compare(root.right, copyRoot.right);
-        compare(root.left.left, copyRoot.left.left);
-        compare(root.left.left.left, copyRoot.left.left.left);
-        compare(root.left.left.left.left, copyRoot.left.left.left.left);
-    }
-
-    /**
-     * This test case creates a large binary tree with 127 nodes and checks whether the copied tree has the same structure and values as the original tree.
-     */
-    @Test
-    public void largeTreeTest() {
-        // Create a large binary tree with 127 nodes
-        Node<Integer> root = new Node<>(1);
-        Node<Integer> curr = root;
-        for (int i = 2; i <= 127; i++) {
-            curr.left = new Node<>(i);
-            curr.right = new Node<>(i + 1);
-            curr = curr.left;
-        }
-
-        final Node<Integer> copyRoot = new CopyTree<Integer>().solveIt(root);
-
-        // Verify that the copied tree has the same structure and values as the original tree
-        Queue<Node<Integer>> queue = new LinkedList<>(Arrays.asList(root));
-        Queue<Node<Integer>> copyQueue = new LinkedList<>(Arrays.asList(copyRoot));
-        while(!queue.isEmpty() && !copyQueue.isEmpty()) {
+        for (int i = 0; i < 127; i++) {
             Node<Integer> node = queue.poll();
-            Node<Integer> copyNode = copyQueue.poll();
 
-            compare(node, copyNode);
+            Node<Integer> left = new Node<>(getRandom(Integer.MIN_VALUE, node.val + 1));
+            node.left = left;
+            queue.add(left);
 
-            if (node.left != null) {
-                queue.add(node.left);
-                copyQueue.add(copyNode.left);
-            }
-
-            if (node.right != null) {
-                queue.add(node.right);
-                copyQueue.add(copyNode.right);
-            }
+            Node<Integer> right = new Node<>(getRandom(node.val, Integer.MAX_VALUE));
+            node.right = right;
+            queue.add(right);
         }
-        assertTrue(queue.isEmpty());
-        assertTrue(copyQueue.isEmpty());
+
+        isValid(root, true);
     }
 
     /**
-     * Helper Methods:
-     * This method compares two nodes and their children for equality in value and reference. If the nodes are null, the method checks whether both nodes are null.
-     * @param node
-     * @param copy
+     * @param min
+     * @param max
+     * @return
      */
-    private void compare(final Node node, final Node copy) {
-        assertValue(node, copy);
-        assertValue(node.left, copy.left);
-        assertValue(node.right, copy.right);
+    private int getRandom(int min, int max) {
+        return ThreadLocalRandom.current().nextInt(min, max);
     }
 
     /**
-     * assertValue: This method asserts that two nodes have the same value and do not reference the same object. If the nodes are null, the method asserts that both nodes are null.
-     * @param node
-     * @param copy
+     * @param root
+     * @param expected
      */
-    private void assertValue(final Node<Integer> node, final Node<Integer> copy) {
-        if (node == null) {
-            assertNull(copy);
-            return;
-        }
+    private void isValid(Node root, final boolean expected) {
 
-        assertNotNull(copy);
+        final boolean actual = new IsBST().solveIt(root);
 
-        // By not converting the values, different data types can be tested for.
-        assertEquals(node.val, copy.val);
+        assertEquals(expected, actual);
 
-        // check that they do not reference the same objects.
-        assertNotEquals(node, copy);
     }
 }
