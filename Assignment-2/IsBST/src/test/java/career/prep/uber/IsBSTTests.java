@@ -141,6 +141,42 @@ public class IsBSTTests {
     }
 
     /**
+     * Creates the bst provided in example 1 and checks that the solution returns true.
+     */
+    @Test
+    public void exampleTest1() {
+        Node<Integer> root = new Node<>(10);
+
+        root.left = new Node<>(8);
+        root.left.right = new Node<>(9);
+
+        root.right = new Node<>(16);
+        root.right.left = new Node<>(13);
+        root.right.right = new Node<>(17);
+        root.right.right.right = new Node<>(20);
+
+        isValid(root, true);
+    }
+
+    /**
+     * Creates the bst provided in example 2 and checks that the solution returns false.
+     */
+    @Test
+    public void exampleTest2() {
+        Node<Integer> root = new Node<>(10);
+
+        root.left = new Node<>(8);
+        root.left.right = new Node<>(9);
+
+        root.right = new Node<>(16);
+        root.right.left = new Node<>(13);
+        root.right.right = new Node<>(17);
+        root.right.right.right = new Node<>(15);
+
+        isValid(root, false);
+    }
+
+    /**
      * @param min
      * @param max
      * @return
