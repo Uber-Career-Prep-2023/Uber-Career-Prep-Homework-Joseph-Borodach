@@ -1,5 +1,7 @@
 package career.prep.uber;
 
-public interface DedupSortedListI<T> {
-    LinkedList<Node<T>>solveIt();
+import java.util.LinkedList;
+
+public interface DedupSortedListI<T extends Comparable<? super T>> {
+    Node<T> solveIt(Node<T> root);
 }

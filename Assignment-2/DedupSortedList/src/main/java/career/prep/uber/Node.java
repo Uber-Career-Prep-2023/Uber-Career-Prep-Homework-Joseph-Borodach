@@ -5,8 +5,7 @@ package career.prep.uber;
  */
 public class Node<T extends Comparable<? super T>> {
     public T val;
-    public Node left;
-    public Node right;
+    public Node next;
 
     public Node(T val) {
         this.val = val;
