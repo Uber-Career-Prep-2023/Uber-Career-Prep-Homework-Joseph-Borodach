@@ -164,7 +164,7 @@ public class DedupSortedListTests {
         Node<Character> expected = new Node<>('a');
         expected.next = new Node<>('b');
 
-        compareChars(root, expected);
+        compare(root, expected);
     }
 
     /**
@@ -231,36 +231,13 @@ public class DedupSortedListTests {
      * @param root the root node of the input list.
      * @param expected the expected output list.
      */
-    private void compare(final Node<Integer> root, Node<Integer> expected) {
-        DedupSortedListI<Integer> dedupSortedListI = new DedupSortedList<>();
-
-        Node<Integer> actual = dedupSortedListI.solveIt(root);
+    private void compare(final Node<?> root, Node<?> expected) {
+        Node<?> actual = new DedupSortedList().solveIt(root);
 
         while (expected != null) {
             assertNotNull(actual);
 
             // System.out.println(actual.val);
-
-            assertEquals(expected.val, actual.val);
-
-            actual = actual.next;
-            expected = expected.next;
-        }
-        assertNull(actual);
-    }
-
-    /**
-     * Compares the output of the solveIt() method for a list of characters to an expected output.
-     * @param root the root node of the input list.
-     * @param expected the expected output list.
-     */
-    private void compareChars(final Node<Character> root, Node<Character> expected) {
-        DedupSortedListI<Character> dedupSortedListI = new DedupSortedList<>();
-
-        Node<Character> actual = dedupSortedListI.solveIt(root);
-
-        while (expected != null) {
-            assertNotNull(actual);
 
             assertEquals(expected.val, actual.val);
 

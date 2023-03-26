@@ -1,7 +1,7 @@
 package career.prep.uber;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
-public class DoublyLinkedListTests {
+public class MoveNthLastToFrontTests {
 
     /**
      * For simplicity, my tests assumed no duplicate nodes.
