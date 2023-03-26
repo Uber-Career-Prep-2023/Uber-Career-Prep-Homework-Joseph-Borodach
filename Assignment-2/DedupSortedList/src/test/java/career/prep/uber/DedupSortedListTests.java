@@ -11,9 +11,6 @@ import static org.junit.Assert.*;
  */
 public class DedupSortedListTests {
 
-    private Node<Integer> node;
-    private Node<Integer> expected_node;
-
     /**
      * Tests the `solveIt()` method when the input list contains only one node.
      */
@@ -31,13 +28,13 @@ public class DedupSortedListTests {
      */
     @Test
     public void twoNodesNoDuplicatesTest() {
+        final LinkedListI<Integer> list = new SinglyLinkedList<>();
+
         Node<Integer> root = new Node<>(1);
-        node = root;
-        add(1, 2);
+        list.insertAtBack(root, 2);
 
         Node<Integer> expected = new Node<>(1);
-        expected_node = expected;
-        add(2);
+        list.insertAtBack(expected, 2);
 
         compare(root, expected);
     }
@@ -47,9 +44,10 @@ public class DedupSortedListTests {
      */
     @Test
     public void twoDuplicateNodesTest() {
+        final LinkedListI<Integer> list = new SinglyLinkedList<>();
+
         Node<Integer> root = new Node<>(1);
-        node = root;
-        add(1, 1);
+        add(1, 1, root, list);
 
         Node<Integer> expected = new Node<>(1);
 
@@ -61,15 +59,15 @@ public class DedupSortedListTests {
      */
     @Test
     public void oneDuplicateTest() {
+        final LinkedListI<Integer> list = new SinglyLinkedList<>();
+
         Node<Integer> root = new Node<>(1);
-        node = root;
-        add(2, 2);
-        add(1, 3);
+        add(2, 2, root, list);
+        add(1, 3, root, list);
 
         Node<Integer> expected = new Node<>(1);
-        expected_node = expected;
-        add(2);
-        add(3);
+        list.insertAtBack(expected, 2);
+        list.insertAtBack(expected, 3);
 
         compare(root, expected);
     }
@@ -79,19 +77,16 @@ public class DedupSortedListTests {
      */
     @Test
     public void multipleDuplicatesTest() {
+        final LinkedListI<Integer> list = new SinglyLinkedList<>();
+
         Node<Integer> root = new Node<>(1);
-        node = root;
-
-        add(2, 1);
-        add(2, 2);
-        add(2, 3);
-
+        add(2, 1, root, list);
+        add(2, 2, root, list);
+        add(2, 3, root, list);
 
         Node<Integer> expected = new Node<>(1);
-        expected_node = expected;
-
-        add(2);
-        add(3);
+        list.insertAtBack(expected, 2);
+        list.insertAtBack(expected, 3);
 
         compare(root, expected);
     }
@@ -101,18 +96,16 @@ public class DedupSortedListTests {
      */
     @Test
     public void descendingTest() {
-        Node<Integer> root = new Node<>(3);
-        node = root;
+        final LinkedListI<Integer> list = new SinglyLinkedList<>();
 
-        add(2, 3);
-        add(2, 2);
-        add(2, 1);
+        Node<Integer> root = new Node<>(3);
+        add(2, 3, root, list);
+        add(2, 2, root, list);
+        add(2, 1, root, list);
 
         Node<Integer> expected = new Node<>(3);
-        expected_node = expected;
-
-        add(2);
-        add(1);
+        list.insertAtBack(expected, 2);
+        list.insertAtBack(expected, 1);
 
         compare(root, expected);
     }
@@ -122,15 +115,15 @@ public class DedupSortedListTests {
      */
     @Test
     public void negativeNodesTest() {
+        final LinkedListI<Integer> list = new SinglyLinkedList<>();
+
         Node<Integer> root = new Node<>(-10);
-        node = root;
-        add(2, -5);
-        add(2, 10);
+        add(2, -5, root, list);
+        add(2, 10, root, list);
 
         Node<Integer> expected = new Node<>(-10);
-        expected_node = expected;
-        add(-5);
-        add(10);
+        list.insertAtBack(expected, -5);
+        list.insertAtBack(expected, 10);
 
         compare(root, expected);
     }
@@ -141,12 +134,13 @@ public class DedupSortedListTests {
      */
     @Test
     public void invalidListTest() {
-        Node<Integer> root = new Node<>(3);
-        node = root;
+        final LinkedListI<Integer> list = new SinglyLinkedList<>();
 
-        add(2, 3);
-        add(2, 2);
-        add(2, 3);
+        Node<Integer> root = new Node<>(3);
+
+        add(2, 3, root, list);
+        add(2, 2, root, list);
+        add(2, 3, root, list);
 
         assertThrows(IllegalArgumentException.class, () -> new DedupSortedList<Integer>().solveIt(root));
     }
@@ -157,12 +151,14 @@ public class DedupSortedListTests {
      */
     @Test
     public void charTest() {
+        final LinkedListI<Character> list = new SinglyLinkedList<>();
+
         Node<Character> root = new Node<>('a');
-        root.next = new Node<>('a');
-        root.next.next = new Node<>('b');
+        list.insertAtBack(root,'a');
+        list.insertAtBack(root,'b');
 
         Node<Character> expected = new Node<>('a');
-        expected.next = new Node<>('b');
+        list.insertAtBack(expected,'b');
 
         compare(root, expected);
     }
@@ -172,13 +168,13 @@ public class DedupSortedListTests {
      */
     @Test
     public void largeTest() {
+        final LinkedListI<Integer> list = new SinglyLinkedList<>();
+
         int value = Integer.MIN_VALUE;
 
         Node<Integer> root = new Node<>(value);
-        node = root;
 
         Node<Integer> expected = new Node<>(value);
-        expected_node = expected;
 
         final int iterations = 500;
 
@@ -189,9 +185,9 @@ public class DedupSortedListTests {
 
             int numberOfDuplicates = getRandom(2, 10);
 
-            add(numberOfDuplicates, value);
+            add(numberOfDuplicates, value, root, list);
 
-            add(value);
+            list.insertAtBack(expected,value);
         }
         compare(root, expected);
     }
@@ -207,23 +203,15 @@ public class DedupSortedListTests {
 
     /**
      * Adds n nodes with the same value to the list represented by the node field.
-     * @param n the number of duplicate nodes to add.
+     * @param nodesToAdd the number of duplicate nodes to add.
      * @param value the value to add to each node.
+     * @param root
+     * @param list
      */
-    private void add(int n, int value) {
-        for (int i = 0; i < n; i++) {
-            node.next = new Node<>(value);
-            node = node.next;
+    private void add(int nodesToAdd, int value, Node<Integer> root, final LinkedListI<Integer> list) {
+        for (int i = 0; i < nodesToAdd; i++) {
+            list.insertAtBack(root, value);
         }
-    }
-
-    /**
-     * Adds a node with the given value to the list represented by the expected_node field.
-     * @param value the value to add to the node.
-     */
-    private void add(int value) {
-        expected_node.next = new Node<>(value);
-        expected_node = expected_node.next;
     }
 
     /**
