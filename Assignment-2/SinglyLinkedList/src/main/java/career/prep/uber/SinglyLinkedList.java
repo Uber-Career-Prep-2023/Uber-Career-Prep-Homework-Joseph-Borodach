@@ -16,7 +16,7 @@ package career.prep.uber;
  * Questions:
  *      None
  */
-public class SinglyLinkedList<T> implements LinkedListI<T> {
+public class SinglyLinkedList<T extends Comparable<? super T>> implements LinkedListI<T> {
     /**
      * Creates new Node<T> with data val at front
      * @param head

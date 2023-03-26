@@ -7,7 +7,7 @@ package career.prep.uber;
  * For simplicity, you can make your nodes store integers rather than generic data types.
  * In each of the methods, you should use pointers in languages that support pointers (e.g., Node<T> * in C++) or a reference in languages that support references (e.g., Python).
  */
-public interface LinkedListI<T> {
+public interface LinkedListI<T extends Comparable<? super T>> {
     /**
      * Creates new Node<T> with data val at front
      * @param head
