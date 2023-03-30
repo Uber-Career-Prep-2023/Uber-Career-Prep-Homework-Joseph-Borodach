@@ -1,7 +1,6 @@
 package career.prep.uber;
 
 import java.util.LinkedList;
-import java.util.Queue;
 
 /**
  * @author Joseph Borodach
@@ -63,38 +62,30 @@ public class LeftView implements LeftViewI {
     }
 
     /**
+     * If we want to get the right most view, just use a dequeue.
+     *
      * @param root of the binary tree
-     * @param h height of the tree
+     * @param height of the tree
      * @return the array filled with the leftmost values in the tree
      */
-    private int[] getLeftMost(Node root, int h) {
-        int[] leftMost = new int[h];
-
-        Queue<Node> queue = new LinkedList<>();
-
+    private int[] getLeftMost(Node root, int height) {
+        int[] array = new int[height];
+        LinkedList<Node> queue = new LinkedList<>();
         queue.add(root);
+        for (int h = 0; h < height; h++) {
 
-        int height = 0;
-
-        while (!queue.isEmpty()) {
+            // Add the first node in the level (left most node) to array
+            array[h] = queue.peek().val;
 
             // dequeue every node in the queue, removing all nodes from previous level
             // enqueue all nodes on the next level
-            // add the first node in the level to the array
             int nodeCount = queue.size();
-
             for (int i = 0; i < nodeCount; i++) {
                 Node parent = queue.poll();
-                // left most node in the list
-                if (i == 0) {
-                    leftMost[height] = parent.val;
-                }
-                add(queue, parent.left);
-                add(queue, parent.right);
+                addChildren(queue, parent);
             }
-            height++;
         }
-        return leftMost;
+        return array;
     }
 
     /**
@@ -104,37 +95,37 @@ public class LeftView implements LeftViewI {
      * @return the height of the tree
      */
     private int getHeight(Node root) {
-        Queue<Node> queue = new LinkedList<>();
-
+        LinkedList<Node> queue = new LinkedList<>();
         queue.add(root);
-
         int height = 0;
-
         while (!queue.isEmpty()) {
             height++;
-
             // dequeue every node in the queue, removing all nodes from previous level
             // enqueue all nodes on the next level
             int nodeCount = queue.size();
-
             for (int i = 0; i < nodeCount; i++) {
                 Node parent = queue.poll();
-
-                add(queue, parent.left);
-                add(queue, parent.right);
+                addChildren(queue, parent);
             }
         }
-
         return height;
     }
 
     /**
+     * @param queue
+     * @param parent
+     */
+    private void addChildren(LinkedList<Node> queue, Node parent) {
+        add(queue, parent.left);
+        add(queue, parent.right);
+    }
+
+    /**
      * If the given node is not null, add it to the queue.
-     *
      * @param queue
      * @param node
      */
-    private void add(Queue<Node> queue, Node node) {
+    private void add(LinkedList<Node> queue, Node node) {
         if (node != null) {
             queue.offer(node);
         }
