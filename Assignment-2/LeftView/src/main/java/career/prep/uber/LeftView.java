@@ -14,7 +14,7 @@ import java.util.Queue;
  * <p><img src="examples.png"></p>
  *
  * Design:
- *      1. Because leetcodes version of the problem does not use generics and instead uses integers, I gave in and used integers.
+ *      1. Because leetcode's version of the problem does not use generics and instead uses integers, I gave in and used integers.
  *      2. However, I used an array since the problem states to use an array, even though leetcode using a list
  *          (which is slightly easier because it does not have a fixed size).
  *      3. As with many of these problems, the solution could be done recursively or iteratively,
@@ -33,7 +33,12 @@ import java.util.Queue;
  *          Add the first node in the level to the array
  *
  * @time: O(n + n) = O(n), the number of nodes in the tree.
- *      The tree is iterated over two times.
+ *      The tree is iterated over two times: Once to get a height and a second time to get the leftmost nodes for each level.
+ *
+ *      If the problem asked to return a list:
+ *          a. Would not need to search the tree two times.
+ *          b. Could use dfs, and avoid searching the bottom right side of the tree unnecessarily.
+ *          However, neither of the changes would the Big O runtime of the program.
  *
  * @Space: O(2 * (h * 2)):
  *      Excluded the space for the return in array
@@ -53,9 +58,8 @@ public class LeftView implements LeftViewI {
         if (root == null) {
             throw new IllegalArgumentException();
         }
-        int n = getHeight(root);
-
-        return getLeftMost(root, n);
+        int h = getHeight(root);
+        return getLeftMost(root, h);
     }
 
     /**
@@ -69,6 +73,7 @@ public class LeftView implements LeftViewI {
         Queue<Node> queue = new LinkedList<>();
 
         queue.add(root);
+
         int height = 0;
 
         while (!queue.isEmpty()) {
@@ -79,22 +84,16 @@ public class LeftView implements LeftViewI {
             int nodeCount = queue.size();
 
             for (int i = 0; i < nodeCount; i++) {
-
                 Node parent = queue.poll();
-
                 // left most node in the list
                 if (i == 0) {
                     leftMost[height] = parent.val;
                 }
-
                 add(queue, parent.left);
                 add(queue, parent.right);
             }
-
             height++;
-
         }
-
         return leftMost;
     }
 
@@ -108,10 +107,10 @@ public class LeftView implements LeftViewI {
         Queue<Node> queue = new LinkedList<>();
 
         queue.add(root);
+
         int height = 0;
 
         while (!queue.isEmpty()) {
-
             height++;
 
             // dequeue every node in the queue, removing all nodes from previous level
@@ -141,22 +140,3 @@ public class LeftView implements LeftViewI {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
