@@ -19,7 +19,7 @@ package career.prep.uber;
  *          currentNode = root
  *              To iteratively explore the tree
  *          floorNode = null
- *      c. while (currentNode != null):
+ *      b. while (currentNode != null):
  *          if (currentNode.val == target):
  *              return currentNode
  *          else if (currentNode.val > target):
