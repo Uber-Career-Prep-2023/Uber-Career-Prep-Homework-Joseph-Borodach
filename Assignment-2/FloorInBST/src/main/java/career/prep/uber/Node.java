@@ -1,14 +1,17 @@
 package career.prep.uber;
 
 /**
- * @param <T> a comparable and serializable data type.
+ * @author Joseph Borodach
+ * @version 1
  */
-public class Node<T extends Comparable<? super T>> {
-    public T val;
-    public Node next;
+public class Node {
+    public int val;
+    public Node left;
+    public Node right;
 
-    public Node(T val) {
+    public Node(int val) {
         this.val = val;
-        this.next = null;
+        this.left = null;
+        this.right = null;
     }
 }
