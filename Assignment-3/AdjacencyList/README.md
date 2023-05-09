@@ -2,8 +2,8 @@
 - Each question should have a hyperlink for the implementation class and test class to save time locating the relevant classes.
 
 # Question 1: Build an Adjacency List/Set Representation of a Graph
-- [Implementation class](https://github.com/Uber-Career-Prep-2023/Uber-Career-Prep-Homework-Joseph-Borodach/blob/main/Assignment-3/AdjacencyList/src/main/java/career/prep/uber/AdjacencyList.java)
-- [Tests]()
+- [Implementation Class](https://github.com/Uber-Career-Prep-2023/Uber-Career-Prep-Homework-Joseph-Borodach/blob/main/Assignment-3/AdjacencyList/src/main/java/career/prep/uber/AdjacencyList.java)
+- [Test Class](https://github.com/Uber-Career-Prep-2023/Uber-Career-Prep-Homework-Joseph-Borodach/blob/main/Assignment-3/AdjacencyList/src/test/java/career/prep/uber/AdjacencyListTests.java)
 - Given an array of pairs of values representing edges in an unweighted graph, create the equivalent adjacency list/set representation (a map from element to a list or set of elements). Pairs represent directed edges: (A, B) means there is an edge from A to B. 
 - If the pair (B, A) is also provided then there is an undirected edge between A and B. 
 - For simplicity, you may assume that each node of the graph stores an integer rather than a generic data type and that the elements are distinct. 
