@@ -21,12 +21,12 @@ public class GraphTraversalTests {
                 2, Set.of(0, 3),
                 3, Set.of(2)
         );
-
         final AdjacencyList adjacencyList = new AdjacencyList();
 
         // Contains every single vertex in the provided sample
         for (int i = 0; i < 4; i++) {
-            assertTrue(new AdjacencyList().dfs(i, graph));
+            assertTrue(adjacencyList.dfs(i, graph));
+            assertTrue(adjacencyList.bfs(i, graph));
         }
     }
 
@@ -38,8 +38,11 @@ public class GraphTraversalTests {
                 2, Set.of(0, 3),
                 3, Set.of(2)
         );
+        final AdjacencyList adjacencyList = new AdjacencyList();
+
         // Contains a vertex which has no edges leaving it
-        assertTrue(new AdjacencyList().dfs(0, graph));
+        assertTrue(adjacencyList.dfs(0, graph));
+        assertTrue(adjacencyList.bfs(0, graph));
     }
 
     @Test
@@ -51,6 +54,7 @@ public class GraphTraversalTests {
                 3, Set.of(2)
         );
         assertFalse(new AdjacencyList().dfs(4, graph));
+        assertFalse(new AdjacencyList().bfs(4, graph));
     }
 
     @Test
@@ -65,9 +69,11 @@ public class GraphTraversalTests {
 
         // Contains a "vertex to" from the 1st forest
         assertTrue(adjacencyList.dfs(2, graph));
+        assertTrue(adjacencyList.bfs(2, graph));
 
         // Contains a "vertex to" from the 2nd forest
         assertTrue(adjacencyList.dfs(4, graph));
+        assertTrue(adjacencyList.bfs(4, graph));
     }
 
     @Test
@@ -76,5 +82,6 @@ public class GraphTraversalTests {
         final Map<Integer, Set<Integer>> graph = new HashMap<>();
 
         assertFalse(new AdjacencyList().dfs(0, graph));
+        assertFalse(new AdjacencyList().bfs(0, graph));
     }
 }

@@ -1,19 +1,26 @@
 package career.prep.uber;
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.Arrays;
+import java.util.HashMap;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.DisplayName;
 
 /**
  * JUnit 5 test class to test the {@link .dfs} method.
  */
 public class TopologicalSortTests {
+    /**
+     * Out-degrees
+     * 0 = 0
+     * 1 = 2
+     * 2 = 2
+     * 3 = 1
+     */
     @Test
     @DisplayName("Test with provided sample")
     public void providedSampleTest() {
@@ -22,38 +29,25 @@ public class TopologicalSortTests {
                 2, Set.of(0, 3),
                 3, Set.of(2)
         );
+        final int[] expected = {1, 2, 3, 0};
 
-        final AdjacencyList adjacencyList = new AdjacencyList();
+        final int[] actual = new AdjacencyList().topologicalSort(graph);
 
-        // Contains every single vertex in the provided sample
-        for (int i = 0; i < 4; i++) {
-            assertTrue(new AdjacencyList().dfs(i, graph));
+        boolean areEqual = Arrays.equals(expected, actual);
+        if (!areEqual) {
+            print(actual);
+            fail();
         }
+        // assertArrayEquals(expected, actual);
     }
 
-    @Test
-    @DisplayName("Test vertex with no edges leaving")
-    public void vertexWithNoEdgesTest() {
-        final Map<Integer, Set<Integer>> graph = Map.of(
-                1, Set.of(2, 3),
-                2, Set.of(0, 3),
-                3, Set.of(2)
-        );
-        // Contains a vertex which has no edges leaving it
-        assertTrue(new AdjacencyList().dfs(0, graph));
-    }
-
-    @Test
-    @DisplayName("Test with non existant vertex")
-    public void nonExistentStartVertexTest() {
-        final Map<Integer, Set<Integer>> graph = Map.of(
-                1, Set.of(2, 3),
-                2, Set.of(0, 3),
-                3, Set.of(2)
-        );
-        assertFalse(new AdjacencyList().dfs(4, graph));
-    }
-
+    /**
+     * Out-degrees
+     * 1 = 1
+     * 2 = 0
+     * 3 = 1
+     * 4 = 0
+     */
     @Test
     @DisplayName("Test with a disconnected graph / several forests")
     public void disconnectedGraphTest() {
@@ -61,14 +55,26 @@ public class TopologicalSortTests {
                 1, Set.of(2),
                 3, Set.of(4)
         );
+        final int[][] expected = {
+                {1, 3, 2, 4},
+                {1, 3, 4, 2},
+                {3, 1, 2, 4},
+                {3, 1, 4, 2}
+        };
 
-        final AdjacencyList adjacencyList = new AdjacencyList();
+        final int[] actual = new AdjacencyList().topologicalSort(graph);
 
-        // Contains a "vertex to" from the 1st forest
-        assertTrue(adjacencyList.dfs(2, graph));
-
-        // Contains a "vertex to" from the 2nd forest
-        assertTrue(adjacencyList.dfs(4, graph));
+        boolean isValidOrder = false;
+        for (int[] order : expected) {
+            if (Arrays.equals(order, actual)) {
+                isValidOrder = true;
+                break;
+            }
+        }
+        if (!isValidOrder) {
+            print(actual);
+        }
+        assertTrue(isValidOrder);
     }
 
     @Test
@@ -76,6 +82,20 @@ public class TopologicalSortTests {
     public void emptyGraphTest() {
         final Map<Integer, Set<Integer>> graph = new HashMap<>();
 
-        assertFalse(new AdjacencyList().dfs(0, graph));
+        final int[] expected = {};
+
+        final int[] actual = new AdjacencyList().topologicalSort(graph);
+
+        assertArrayEquals(expected, actual);
+    }
+
+    /**
+     * @param actual
+     */
+    private void print(final int[] actual) {
+        int last = actual.length - 1;
+        for (int i = 0; i < actual.length; i++) {
+            System.out.print(actual[i] + (i != last ? ", " : "\n"));
+        }
     }
 }

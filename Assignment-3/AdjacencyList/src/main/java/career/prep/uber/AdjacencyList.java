@@ -108,7 +108,7 @@ public class AdjacencyList {
      *      The same points apply to dfs below.
      *
      * @time: O(E + V), the algorithm is essentially using dfs.
-     * @space: O(V + E) for the queue, and O(V) for the discovered set.
+     * @space: O(2V) = O(V), the queue costs O(V) and the visited set costs O(V)
      *
      * @param target The target vertex to search for.
      * @param graph The graph represented as a map of vertices and their adjacent vertices.
@@ -119,27 +119,30 @@ public class AdjacencyList {
         if (graph == null) {
             throw new IllegalArgumentException("Graph cannot be null");
         }
-        Set<Integer> discovered = new HashSet<>();
+        Set<Integer> visited = new HashSet<>();
         for (int start : graph.keySet()) {
-            Queue<Integer> queue = new LinkedList<>();
+
+            LinkedList<Integer> queue = new LinkedList<>();
+
+            // Mark the current node as visited and enqueue it
+            visited.add(start);
             queue.offer(start);
+
             while(!queue.isEmpty()) {
                 int from = queue.poll();
-                if (discovered.contains(from)) {
-                    continue;
-                }
-                // Located the target vertex.
                 if (from == target) {
                     return true;
                 }
-                discovered.add(from);
                 // If this vertex is not directly connected to any other vertices, continue to the next vertex.
                 if (!graph.containsKey(from)) {
                     continue;
                 }
-                // Add all this edges from this vertex
+                // Add all vertices connected directly from this vertex, which have not yet been visited
                 for (int to : graph.get(from)) {
-                    queue.offer(to);
+                    if (!visited.contains(to)) {
+                        visited.add(to);
+                        queue.offer(to);
+                    }
                 }
             }
         }
@@ -156,8 +159,8 @@ public class AdjacencyList {
      *      - I choose to use a stack.
      *
      * Observations & Assumptions
-     *      Record which nodes have been "discovered", so no node is explored more than once.
-     *          - Use a "discovered" set.
+     *      Record which nodes have been "visited", so no node is explored more than once.
+     *          - Use a "visited" set.
      *      Never stated that the Graph is connected: Therefore, there could be several forests:
      *          - Will need to check each key in the map to see if it was a separate forest.
      *      No need to check that there are duplicate edges:
@@ -165,7 +168,7 @@ public class AdjacencyList {
      *      Cycles should not be an issue because the above point should account for them.
      *
      * @time: O(E + V)
-     * @space: O(E + V)
+     * @space: O(2V) = O(V), the stack costs O(V) and the visited set costs O(V)
      *
      * @param target The target vertex to search for.
      * @param graph The graph represented as a map of vertices and their adjacent vertices.
@@ -176,40 +179,82 @@ public class AdjacencyList {
         if (graph == null) {
             throw new IllegalArgumentException("Graph cannot be null");
         }
-        Set<Integer> discovered = new HashSet<>();
-        for (int startVertex : graph.keySet()) {
-            Stack<Integer> toExplore = new Stack<>();
-            // Explore this vertex and all paths from it.
-            // There is no need to make any checks on this vertex before entering the next loop,
-            // it will be immediately checked in the 1st iteration of the loop.
-            toExplore.push(startVertex);
-            while (!toExplore.isEmpty()) {
-                int from = toExplore.pop();
-                // Already discovered this vertex: Don't explore it again.
-                if (discovered.contains(from)) {
-                    continue;
-                }
-                // Located the target vertex.
+        Set<Integer> visited = new HashSet<>();
+        for (int start : graph.keySet()) {
+
+            Stack<Integer> stack = new Stack<>();
+
+            // Mark the current node as visited and enqueue it
+            visited.add(start);
+            stack.push(start);
+
+            while (!stack.isEmpty()) {
+                int from = stack.pop();
                 if (from == target) {
                     return true;
                 }
-                // Explore this vertex:
-                discovered.add(from);
                 // If this vertex is not directly connected to any other vertices, continue to the next vertex.
                 if (!graph.containsKey(from)) {
                     continue;
                 }
-                // Add all the vertices directly connected from this vertex.
+                // Add all vertices connected directly from this vertex, which have not yet been visited
                 for (int to : graph.get(from)) {
-                    toExplore.push(to);
+                    if (!visited.contains(to)) {
+                        visited.add(to);
+                        stack.push(to);
+                    }
                 }
             }
         }
         return false;
     }
 
+    /**
+     * Approaches
+     *      1. Stack and recursion
+     *          call topologicalSort for each key in the map
+     *      2. Two stacks
+     *
+     * Observations:
+     *      The algorithm below does not work for disconnected graphs.
+     *      One option is to record the outdegree for each node using a sorted map.
+     *      @time: O(E + V log V)?
+     *
+     * @time: O(E + V), the algorithm is essentially using dfs
+     * @space: O(V), extra space needed for the stack
+     *
+     * @param graph
+     * @return
+     */
     public int[] topologicalSort(Map<Integer, Set<Integer>> graph) {
-        return null;
+        if (graph == null) {
+            throw new IllegalArgumentException("Graph cannot be null");
+        }
+        Stack<Integer> stack = new Stack<>();
+        Set<Integer> visited = new HashSet<>();
+        for (int start : graph.keySet()) {
+            if (!visited.contains(start)) {
+                topologicalSortUtil(start, visited, stack, graph);
+            }
+        }
+        int len = stack.size();
+        int[] ans = new int[len];
+        for (int i = 0; i < len; i++) {
+            ans[i] = stack.pop();
+        }
+        return ans;
+    }
+
+    private void topologicalSortUtil(int vertex, Set<Integer> visited, Stack<Integer> stack, Map<Integer, Set<Integer>> graph){
+        visited.add(vertex);
+        if (graph.containsKey(vertex)) {
+            // explore all its children first
+            for (int neighbor : graph.get(vertex)) {
+                if (!visited.contains(neighbor))
+                    topologicalSortUtil(neighbor, visited, stack, graph);
+            }
+        }
+        stack.push(vertex);
     }
 }
 
