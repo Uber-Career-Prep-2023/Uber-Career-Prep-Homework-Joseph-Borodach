@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
 /**
  * JUnit 5 test class to test the {@link .dfs} method.
  */
-public class DFSTests {
+public class GraphTraversalTests {
     @Test
     @DisplayName("Test with provided sample")
     public void providedSampleTest() {
