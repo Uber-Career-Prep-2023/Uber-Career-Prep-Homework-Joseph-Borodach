@@ -1,3 +1,6 @@
+# Note The Following Changes: 
+- Each question should have a hyperlink for the implementation class and test class to save time locating the relevant classes.
+
 # Question 1: Build an Adjacency List/Set Representation of a Graph
 - [Implementation Class](https://github.com/Uber-Career-Prep-2023/Uber-Career-Prep-Homework-Joseph-Borodach/blob/main/Assignment-3/AdjacencyList/src/main/java/career/prep/uber/AdjacencyList.java)
 - [Test Class](https://github.com/Uber-Career-Prep-2023/Uber-Career-Prep-Homework-Joseph-Borodach/blob/main/Assignment-3/AdjacencyList/src/test/java/career/prep/uber/AdjacencyListTests.java)
