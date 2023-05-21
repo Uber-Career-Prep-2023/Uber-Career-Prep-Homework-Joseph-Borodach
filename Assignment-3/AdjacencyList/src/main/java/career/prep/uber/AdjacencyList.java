@@ -230,16 +230,21 @@ public class AdjacencyList {
         if (graph == null) {
             throw new IllegalArgumentException("Graph cannot be null");
         }
+
         Stack<Integer> stack = new Stack<>();
         Set<Integer> visited = new HashSet<>();
+
         for (int start : graph.keySet()) {
             if (!visited.contains(start)) {
                 topologicalSortUtil(start, visited, stack, graph);
             }
         }
+
+        // Add the vertices to the return array
         int len = stack.size();
         int[] ans = new int[len];
         for (int i = 0; i < len; i++) {
+            // System.out.print(stack.peek());
             ans[i] = stack.pop();
         }
         return ans;
@@ -254,6 +259,8 @@ public class AdjacencyList {
                     topologicalSortUtil(neighbor, visited, stack, graph);
             }
         }
+
+        // Push the current vertex to the stack
         stack.push(vertex);
     }
 }
