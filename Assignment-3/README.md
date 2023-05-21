@@ -13,3 +13,11 @@
 - Implement a basic DFS and BFS searching for a target value and a topological sort (using either DFS or Kahn’s algorithm).
 <img width="668" alt="Screenshot 2023-05-09 at 14 05 44" src="https://github.com/Uber-Career-Prep-2023/Uber-Career-Prep-Homework-Joseph-Borodach/assets/95253429/c33189d8-7bbb-44b2-b98d-be79f712dfef">
 <img width="468" alt="Screenshot 2023-05-09 at 14 05 59" src="https://github.com/Uber-Career-Prep-2023/Uber-Career-Prep-Homework-Joseph-Borodach/assets/95253429/55383fe5-efa8-40a7-a813-8d3c811aadf7">
+
+# Question 2: Build a Heap
+- [Implementation Class]()
+- Tests Classes:
+  - [REPLACE]()
+- Write a min heap class according to the following API using an array as the underlying data structure. 
+- (A max heap has the same implementation; you simply need to flip the direction of the comparators.) 
+- For simplicity, you can assume that the heap holds integers rather than generic comparables.
