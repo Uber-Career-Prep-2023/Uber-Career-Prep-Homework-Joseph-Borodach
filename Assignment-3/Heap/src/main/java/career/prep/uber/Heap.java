@@ -3,6 +3,8 @@ package career.prep.uber;
 import java.util.NoSuchElementException;
 
 /**
+ * @author Joseph Borodach
+ *
  * Question 2: Write a min heap class according to the following API using an array as the underlying data structure.
  *      (A max heap has the same implementation; you simply need to flip the direction of the comparators.)
  *      For simplicity, you can assume that the heap holds integers rather than generic comparables.
@@ -18,68 +20,69 @@ import java.util.NoSuchElementException;
  *      When the array is full, will create an array 2x the size and copy the numbers over
  *
  * Approaches:
- *      1. Brute force solution: Add the number to the end of the array, hit "Arrays.sort"
- *          - Insertion and removal time would O(n).
- *          - I assumed that this is not what an interview would want to be implemented.
+ * 1. Brute force solution: Add the number to the end of the array and sort it using Arrays.sort().
+ *    - Insertion and removal time would be O(n).
+ *    - This approach is not recommended as it has poor performance.
  *
- *      Note: I only wrote the documentation for approach 2 because I forgot about approach 3.
- *          [You can skip to approach 3.]
+ * 2. Using binary search:
+ *    a. Maintain a pointer to the last index used and keep the array sorted in descending order.
+ *       - Insertion:
+ *         - Perform binary search to find the correct position and shift all numbers greater than the current one to the right.
+ *         - Time complexity: O(log n + n) = O(n) (logarithmic for binary search and linear for shifting elements)
+ *         - This approach has poor runtime for insertion when the inserted element is the greatest number.
+ *       - Deletion from the top:
+ *         - Zero out the rightmost number and move the right pointer to the left by one index.
+ *         - Time complexity: O(1) (constant time)
  *
- *      2. Using binary search: From here there are fundamentally 2 different possible approaches:
- *          a. Have a pointer to the last index used.
- *              Maintain the array sorted in descending order.
- *              Insert:
- *                  - Perform binary search, and shift all numbers greater than the current one to the right.
- *                  - time: O(log n + n) = O(n), linear.
- *                      - [O(log n) is for the binary search and O(n) is for shifting the elements.
- *                      - This runtime is the issue, its terrible and is the reason why we need approach "b".
- *                      - When: If the element inserted is the greatest number.
- *              Delete from top:
- *                  - Zero out the right most number and move the right pointer to the left one index.
- *                  - time: O(1), constant.
- *          b. Have pointers to the first and last indexes used.
- *              Insert:
- *                  - Use binary search to locate where the element should be inserted.
- *                  - Shift numbers:
- *                      - If both pointers have reached the ends, grow array.
- *                      - If either pointer has reached its end, shift the numbers of the other side.
- *                      - If there are fewer elements to the left, then shift the left numbers over one.
- *                      - Otherwise, shift the right numbers over one index to the right.
- *                  - time: Complicated
- *                      - O(log n + n/2) = O(log n)
- *                      - We should never need to shift more than half of the elements as long as when we grow the array, we add the elements to the middle of the array.
- *              Delete from top:
- *                  - Zero out the left most number and move the left pointer to the right one index.
- *                  - time: O(1), constant.
- *      3. Use a binary tree
- *          Insertion: Insert an element at the end of the right pointer
- *              Swim the child up until it arrives at a parents less than itself.
- *              time: O(log n), linear, because need to compare itself to O(log n) parent nodes.
- *          Remove top: Remove the number at index 1 and sink down the element.
- *              time: O(log n), linear, because need to sink the number down to the bottom of the tree.
+ *    b. Maintain pointers to the first and last indexes used.
+ *       - Insertion:
+ *         - Use binary search to locate the position where the element should be inserted.
+ *         - Shift numbers accordingly:
+ *           - If both pointers have reached the ends, grow the array.
+ *           - If either pointer has reached its end, shift the numbers on the other side.
+ *           - If there are fewer elements on the left, shift the left numbers over by one.
+ *           - Otherwise, shift the right numbers one index to the right.
+ *         - Time complexity: Complicated but generally O(log n + n/2) = O(log n) (logarithmic for binary search)
+ *           - Shifting should not require more than half of the elements to be shifted if elements are added to the middle during array growth.
+ *       - Deletion from the top:
+ *         - Zero out the leftmost number and move the left pointer to the right by one index.
+ *         - Time complexity: O(1) (constant time)
+ *
+ * 3. Using a binary tree:
+ *    - Insertion: Insert an element at the end of the right pointer and swim it up until it reaches a parent less than itself.
+ *      - Time complexity: O(log n) (logarithmic time as it needs to compare with parent nodes)
+ *    - Deletion from the top: Remove the number at index 1 and sink down the element.
+ *      - Time complexity: O(log n) (logarithmic time as it needs to sink the number down to the bottom of the tree)
  */
 public class Heap {
     private int n;
     private int[] arr;
 
+    /**
+     * Constructs an empty heap with initial capacity 1.
+     */
     public Heap() {
         this(1);
     }
 
     /**
-     * @param initialCapacity
-     * "+ 1" because the numbers will start add index 1
+     * Constructs an empty heap with the specified initial capacity.
+     * @param initialCapacity the initial capacity of the heap.
+     * @throws if initialCapacity is less than zero.
      */
     public Heap(int initialCapacity) {
+        if (initialCapacity < 0) {
+            throw new IllegalArgumentException("initialCapacity cannot be negative.");
+        }
         arr = new int[initialCapacity + 1];
         n = 0;
     }
 
     /**
-     * The smallest element is at index 1, and the largest element is at index n.
-     * returns the min (top) element in the heap.
-     * @throws NoSuchElementException if heap is empty.
-     * @time: O(1), constant.
+     * Returns the smallest element (top) in the heap.
+     * @return the smallest element in the heap
+     * @throws NoSuchElementException if the heap is empty
+     * @time complexity: O(1) (constant time)
      */
     public int top() {
         if (isEmpty()) {
@@ -89,12 +92,12 @@ public class Heap {
     }
 
     /**
-     * adds int x to the heap in the appropriate position
-     * @param x
-     * @time: O(log n), logarithmic.
+     * Adds an integer to the heap in the appropriate position.
+     * @param x the integer to be inserted
+     * @time complexity: O(log n) (logarithmic time)
      */
     public void insert(int x) {
-        // double array size if necessary.
+        // Double the array size if necessary.
         if (n == arr.length - 1) {
             resize(arr.length * 2);
         }
@@ -103,9 +106,9 @@ public class Heap {
     }
 
     /**
-     * removes the min (top) element in the heap
-     * @throws NoSuchElementException if heap is empty.
-     * @time: O(log n), logarithmic.
+     * Removes the smallest element (top) from the heap.
+     * @throws NoSuchElementException if the heap is empty
+     * @time complexity: O(log n) (logarithmic time)
      */
     public void remove() {
         if (isEmpty()) {
@@ -114,10 +117,10 @@ public class Heap {
         exch(1, n--);
         sink(1);
 
-        // erase the element - this is not critical
+        // Erase the element (optional)
         arr[n + 1] = Integer.MAX_VALUE;
 
-        // Shrink array
+        // Shrink the array if necessary.
         if (n > 0 && n == (arr.length - 1) / 4) {
             resize(arr.length / 2);
         }
@@ -127,15 +130,17 @@ public class Heap {
      * Helper Methods.
      *****************/
     /**
-     * @return if the heap is empty.
+     * Checks if the heap is empty.
+     * @return true if the heap is empty, false otherwise
      */
     public boolean isEmpty() {
         return n == 0;
     }
 
     /**
-     * @param capacity to resize the array to.
-     * @time: O(capacity + n) = O(capacity).
+     * Resizes the array to the specified capacity.
+     * @param capacity the new capacity of the array
+     * @time complexity: O(capacity + n) = O(capacity)
      */
     private void resize(int capacity) {
         if (capacity <= n) {
@@ -148,6 +153,10 @@ public class Heap {
         arr = temp;
     }
 
+    /**
+     * Moves the element at index k up the heap until it reaches a parent less than itself.
+     * @param k the index of the element to be moved
+     */
     private void swim(int k) {
         while (k > 1 && greater(k/2, k)) {
             // swap child with parent
@@ -156,6 +165,10 @@ public class Heap {
         }
     }
 
+    /**
+     * Moves the element at index k down the heap until it reaches the appropriate position.
+     * @param k the index of the element to be moved
+     */
     private void sink(int k) {
         while (2*k <= n) {
             int j = 2*k;
@@ -170,12 +183,23 @@ public class Heap {
         }
     }
 
+    /**
+     * Exchanges the elements at the specified indices in the array.
+     * @param i the index of the first element
+     * @param j the index of the second element
+     */
     private void exch(int i, int j) {
         int temp = arr[i];
         arr[i] = arr[j];
         arr[j] = temp;
     }
 
+    /**
+     * Compares the elements at the specified indices in the array.
+     * @param i the index of the first element
+     * @param j the index of the second element
+     * @return true if the element at index i is greater than the element at index j, false otherwise
+     */
     private boolean greater(int i, int j) {
         return arr[i] > arr[j];
     }
