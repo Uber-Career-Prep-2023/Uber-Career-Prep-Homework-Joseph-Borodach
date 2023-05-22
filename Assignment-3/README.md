@@ -23,8 +23,8 @@
 <img width="738" alt="Screenshot 2023-05-21 at 16 35 36" src="https://github.com/Uber-Career-Prep-2023/Uber-Career-Prep-Homework-Joseph-Borodach/assets/95253429/4c4fcd6c-9895-4bb9-acbc-10e5e1a3f69d">
 
 # Question 3: Build a Priority Queue
-- [Implementation Class]()
-- [Test Class]()
+- [Implementation Class](https://github.com/Uber-Career-Prep-2023/Uber-Career-Prep-Homework-Joseph-Borodach/blob/main/Assignment-3/PriorityQueue/src/main/java/career/prep/uber/PriorityQueue.java)
+- [Test Class](https://github.com/Uber-Career-Prep-2023/Uber-Career-Prep-Homework-Joseph-Borodach/blob/main/Assignment-3/PriorityQueue/src/test/java/career/prep/uber/PriorityQueueTests.java)
 - A priority queue functions like a queue except that elements are removed in order of priority rather than insertion. 
 - This is typically implemented as a max heap that stores pairs of elements and numeric weights, with the weights used as the values in the heap. 
 - Implement a priority queue according to the following API using a heap as the underlying data structure. 
