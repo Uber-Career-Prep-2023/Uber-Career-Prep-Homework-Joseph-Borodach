@@ -156,16 +156,3 @@ public class FirstKBinaryNumbers {
         return binaryStrings;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
