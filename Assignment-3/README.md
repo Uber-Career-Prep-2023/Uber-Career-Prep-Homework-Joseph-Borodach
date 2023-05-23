@@ -2,6 +2,22 @@
 - Each question should have a hyperlink for the implementation class and test class to save time locating the relevant classes.
 
 # Part 1: Data Structure Implementations
+## Instructions
+- If you are unfamiliar with graph or heaps, please read the relevant articles before attempting the corresponding problems:
+  - Graphs:
+    - Graph representations
+    - Topological sorting
+    - Kahn’s algorithm
+    - Directed vs. undirected graphs
+    - Cyclic vs. acyclic graphs
+    - Weighted vs. unweighted graphs
+  - Heaps:
+    - Definition & types of heap
+    - Array representation
+- You’re welcome to consult other internet resources on the definition and use cases of these data structures, but do not read any implementations before attempting these problems. 
+- (If you’ve seen or created implementations in the past, of course that’s okay, but do these problems without consulting them.)
+- The core implementations do not have a maximum time; you will need them to understand in order to do the rest of the assignment. 
+- If you are stuck, please get help from your mentor.
 ## Question 1: Build an Adjacency List/Set Representation of a Graph
 - [Implementation Class](https://github.com/Uber-Career-Prep-2023/Uber-Career-Prep-Homework-Joseph-Borodach/blob/main/Assignment-3/AdjacencyList/src/main/java/career/prep/uber/AdjacencyList.java)
 - Tests Classes:
@@ -34,6 +50,17 @@
 <img width="1252" alt="Screenshot 2023-05-22 at 09 50 34" src="https://github.com/Uber-Career-Prep-2023/Uber-Career-Prep-Homework-Joseph-Borodach/assets/95253429/be417b88-67a5-4f9b-a583-d6cdb989168e">
 
 # Part 2: Graph & Data Structure Selection Problems
+## Instructions
+- For each problem, identify the appropriate data structure for solving the problem. 
+- For graph problems, also identify the appropriate graph algorithm. 
+- State the data structure (and algorithm, if applicable) in a comment at the top of your file. 
+- Then, write a function to solve the problem and write test cases to check your function. 
+- When run, the file you submit should execute your function on your test cases (e.g., through a main method, if applicable in your language). 
+- State the time and space complexity of your solution in a comment at the top of your file.
+- Time how long you spend on each problem. 
+- You should actively work on each problem for a MAXIMUM of 40 minutes. Once 40 minutes has elapsed, submit whatever you have, regardless of whether you are finished. 
+- Please indicate in a comment at the bottom of your file how long you spent on the problem. 
+- It is important that you are honest about how long each problem took you as it will help your mentor help you!
 ## Question 4: NumberOfIslands
 - [Implementation Class](https://github.com/Uber-Career-Prep-2023/Uber-Career-Prep-Homework-Joseph-Borodach/blob/main/Assignment-3/NumberOfIslands/src/main/java/career/prep/uber/NumberOfIslands.java)
 - [Test Class](https://github.com/Uber-Career-Prep-2023/Uber-Career-Prep-Homework-Joseph-Borodach/blob/main/Assignment-3/NumberOfIslands/src/test/java/career/prep/uber/NumberOfIslandsTests.java)
