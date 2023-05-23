@@ -8,6 +8,8 @@ import java.util.NoSuchElementException;
 import static org.junit.Assert.*;
 
 /**
+ * @author josephborodach
+ *
  * JUnit 5 test class to test the {@link Heap} class.
  */
 public class HeapTests {

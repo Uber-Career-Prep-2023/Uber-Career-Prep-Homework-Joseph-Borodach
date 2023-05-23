@@ -3,7 +3,7 @@ package career.prep.uber;
 import java.util.NoSuchElementException;
 
 /**
- * @author Joseph Borodach
+ * @author josephborodach
  *
  * Question 2: Write a min heap class according to the following API using an array as the underlying data structure.
  *      (A max heap has the same implementation; you simply need to flip the direction of the comparators.)
