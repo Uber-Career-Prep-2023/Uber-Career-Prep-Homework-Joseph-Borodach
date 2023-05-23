@@ -42,4 +42,17 @@ public class FirstKBinaryNumbersTests {
         assertArrayEquals(expected, actual);
     }
 
+    @Test
+    public void zeroTest() {
+        final int k = 0;
+
+        assertThrows(IllegalArgumentException.class, () -> new FirstKBinaryNumbers().solveIt(k));
+    }
+
+    @Test
+    public void negativeTest() {
+        final int k = 0;
+
+        assertThrows(IllegalArgumentException.class, () -> new FirstKBinaryNumbers().solveIt(k));
+    }
 }
