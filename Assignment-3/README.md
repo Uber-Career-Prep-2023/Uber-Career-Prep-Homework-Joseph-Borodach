@@ -76,8 +76,8 @@
 <img width="1075" alt="Screenshot 2023-05-23 at 11 17 38" src="https://github.com/Uber-Career-Prep-2023/Uber-Career-Prep-Homework-Joseph-Borodach/assets/95253429/f4c028f8-344e-4c37-984b-a3c6cb813837">
 
 ## Question 6: RoadNetworks
-- [Implementation Class]()
-- [Test Class]()
+- [Implementation Class](https://github.com/Uber-Career-Prep-2023/Uber-Career-Prep-Homework-Joseph-Borodach/blob/main/Assignment-3/RoadNetworks/src/main/java/career/prep/uber/RoadNetworks.java)
+- [Test Class](https://github.com/Uber-Career-Prep-2023/Uber-Career-Prep-Homework-Joseph-Borodach/blob/main/Assignment-3/RoadNetworks/src/test/java/career/prep/uber/RoadNetworksTests.java)
 - In some states, it is not possible to drive between any two towns because they are not connected to the same road network. 
 - Given a list of towns and a list of pairs representing roads between towns, return the number of road networks. 
 - (For example, a state in which all towns are connected by roads has 1 road network, and a state in which none of the towns are connected by roads has 0 road networks.)
