@@ -97,3 +97,22 @@
 - Determine the length of the shortest path from the origin to the destination in which the edges traversed alternate in color. 
 - Return -1 if no such path exists.
 <img width="797" alt="Screenshot 2023-05-25 at 14 23 51" src="https://github.com/Uber-Career-Prep-2023/Uber-Career-Prep-Homework-Joseph-Borodach/assets/95253429/15089e80-bb7f-4059-97e6-591d7a70ee42">
+
+## Question 9: MergeKSortedArrays
+- [Implementation Class](https://github.com/Uber-Career-Prep-2023/Uber-Career-Prep-Homework-Joseph-Borodach/blob/main/Assignment-3/MergeKSortedArrays/src/main/java/career/prep/uber/MergeKSortedArrays.java)
+- [Test Class](https://github.com/Uber-Career-Prep-2023/Uber-Career-Prep-Homework-Joseph-Borodach/blob/main/Assignment-3/MergeKSortedArrays/src/test/java/career/prep/uber/MergeKSortedArraysTests.java)
+- Given an array of k sorted arrays, merge the k arrays into a single sorted array.
+<img width="520" alt="Screenshot 2023-05-29 at 07 45 09" src="https://github.com/Uber-Career-Prep-2023/Uber-Career-Prep-Homework-Joseph-Borodach/assets/95253429/2099052f-3962-4e27-b3dd-4bbf100f26a1">
+
+## Question 10: PrerequisiteCourses
+- [Implementation Class]()
+- [Test Class]()
+- Given: 
+  - A list of courses that a student needs to take to complete their major.
+  - A map of courses to their prerequisites.
+- Return a valid order for them to take their courses assuming they only take 1 course for their major at once.
+
+## Question 11: 
+- [Implementation Class]()
+- [Test Class]()
+- 
