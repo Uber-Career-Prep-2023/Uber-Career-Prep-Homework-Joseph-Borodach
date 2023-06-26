@@ -1,19 +1,17 @@
 package career.prep.uber;
 
-// import org.junit.Test;
-
-import static org.junit.Assert.*;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 /**
- * @author josephborodach
- *
  * JUnit 5 test class to test the {@link Trie} class.
  */
 public class TrieTests {
