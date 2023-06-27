@@ -6,8 +6,8 @@
 - Your class should adhere to the following API, adjusted appropriately for your language of choice.
 <img width="619" alt="Screenshot 2023-06-26 at 14 06 38" src="https://github.com/Uber-Career-Prep-2023/Uber-Career-Prep-Homework-Joseph-Borodach/assets/95253429/cc55f67e-220a-4dae-a06e-89273b0934f2">
 ## 2: Boggle
-- [Implementation Class]()
-- [Test Class]()
+- [Implementation Class](https://github.com/Uber-Career-Prep-2023/Uber-Career-Prep-Homework-Joseph-Borodach/blob/main/Assignment-4/Boggle/src/main/java/career/prep/uber/Boggle.java)
+- [Test Class](https://github.com/Uber-Career-Prep-2023/Uber-Career-Prep-Homework-Joseph-Borodach/blob/main/Assignment-4/Boggle/src/test/java/career/prep/uber/BoggleTests.java)
 - Boggle is a word game in which players compete to find the most words on a square grid of random letters.
 - Valid words must be at least three characters and formed from non-overlapping (i.e., a position on the board can only be used once in a word) adjacent (including diagonal) letters.
 - Given a Boggle board and a dictionary of valid words, return all valid words on the board.
