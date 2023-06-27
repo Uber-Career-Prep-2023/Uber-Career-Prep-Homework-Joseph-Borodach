@@ -16,4 +16,7 @@
 - Example:
 <img width="498" alt="Screenshot 2023-06-26 at 15 54 19" src="https://github.com/Uber-Career-Prep-2023/Uber-Career-Prep-Homework-Joseph-Borodach/assets/95253429/ed3ba54b-2a3b-4ed3-82fc-af381ed17e4f">
 
-
+## 3: Running Median
+- [Implementation Class](https://github.com/Uber-Career-Prep-2023/Uber-Career-Prep-Homework-Joseph-Borodach/blob/main/Assignment-4/RunningMedian/src/main/java/career/prep/uber/RunningMedian.java)
+- [Test Class](https://github.com/Uber-Career-Prep-2023/Uber-Career-Prep-Homework-Joseph-Borodach/blob/main/Assignment-4/RunningMedian/src/test/java/career/prep/uber/RunningMedianTests.java)
+<img width="703" alt="Screenshot 2023-06-27 at 16 37 46" src="https://github.com/Uber-Career-Prep-2023/Uber-Career-Prep-Homework-Joseph-Borodach/assets/95253429/d3c9be16-269e-4101-8b47-635345dfad97">
