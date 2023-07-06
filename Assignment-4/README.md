@@ -56,8 +56,8 @@
 - Given a square matrix of 0s and 1s, find the dimension of the largest square consisting only of 1s.
 
 ## 8: CoinChange
-- [Implementation Class]()
-- [Test Class]()
+- [Implementation Class](https://github.com/Uber-Career-Prep-2023/Uber-Career-Prep-Homework-Joseph-Borodach/blob/main/Assignment-4/CoinChange/src/main/java/career/prep/uber/CoinChange.java)
+- [Test Class](https://github.com/Uber-Career-Prep-2023/Uber-Career-Prep-Homework-Joseph-Borodach/blob/main/Assignment-4/CoinChange/src/test/java/career/prep/uber/CoinChangeTests.java)
 
 ## 9: AdoptAPet
 - [Implementation Class]()
